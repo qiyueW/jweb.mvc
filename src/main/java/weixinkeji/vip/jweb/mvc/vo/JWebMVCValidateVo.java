@@ -4,12 +4,12 @@ public class JWebMVCValidateVo {
 
 	public final String regex;
 	public final String errorMessage;
-	public final boolean isMust;
+	public final boolean alloyNull;
 	
 	public JWebMVCValidateVo(String regex, String errorMessage, boolean isMust) {
 		this.regex = regex;
 		this.errorMessage = errorMessage;
-		this.isMust = isMust;
+		this.alloyNull = isMust;
 	}
 	
 	/**

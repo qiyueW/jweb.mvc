@@ -17,12 +17,12 @@ public class Hello {
 		return helloName;
 	}
 
-	public void setHelloName(String helloName,int i,Hello h) {
+	public void setHelloName(String helloName, int i, Hello h) {
 		this.helloName = helloName;
 	}
-	
+
 	private void tos() {
-		
+
 	}
 
 }

@@ -13,5 +13,13 @@ public class JWebMvc {
 		this.response = response;
 	}
 	
+	/**
+	 * 设置 键值对
+	 * @param name 属性名 key
+	 * @param o		属性值 value
+	 */
+	public void setAttribute(String name, Object o){
+		this.request.setAttribute(name, o);
+	}
 	
 }

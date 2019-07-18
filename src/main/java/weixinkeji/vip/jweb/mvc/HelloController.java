@@ -18,7 +18,7 @@ public class HelloController {
 			System.out.println("方法名："+m.getName()+"//"+m.getModifiers()+"//"+m.getParameterCount());
 //			m.invoke(obj, null);
 			for(Parameter p:m.getParameters()) {
-				System.out.println(p.getModifiers()+"//"+p.getName()+"//"+p.getClass()+p.getType());
+				System.out.println(p+"="+p.getModifiers()+"//"+p.getName()+"//"+p.getClass()+p.getType());
 			}
 		}
 	}

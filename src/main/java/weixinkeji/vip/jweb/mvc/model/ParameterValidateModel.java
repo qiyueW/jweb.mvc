@@ -11,7 +11,7 @@ import weixinkeji.vip.jweb.mvc._validate.JWebMVCValidateVo;
  * @author wangchunzi
  *
  */
-public class ControllerMethodParameterModel {
+public class ParameterValidateModel {
 
 	/**
 	 * 如何取得參數的值
@@ -47,13 +47,21 @@ public class ControllerMethodParameterModel {
 	public final Map<Field,JWebMVCValidateVo> validate_ClassField;
 	//普通類型綁定的校驗
 	public final JWebMVCValidateVo onValidate;
+	public final int checkType;
 	
-	public ControllerMethodParameterModel(Class<?> ptype,String key,paramGetType type,Map<Field,JWebMVCValidateVo> validate_ClassField,JWebMVCValidateVo onValidate) {
+	public ParameterValidateModel(Class<?> ptype,String key,paramGetType type,Map<Field,JWebMVCValidateVo> validate_ClassField,JWebMVCValidateVo onValidate) {
 		this.parameTerType=ptype;
 		this.getParam=type.code;
 		this.key=key;
 		this.validate_ClassField=validate_ClassField;
 		this.onValidate=onValidate;
+		if(null!=this.validate_ClassField) {
+			checkType=1;//用户vo类型的校验
+		}else if(null!=onValidate) {
+			checkType=2;//普通类型的校验
+		}else {
+			checkType=0;//无校验。
+		}
 	}
 	
 	

@@ -9,8 +9,8 @@ public class Hello {
 		return helloId;
 	}
 
-	public void setHelloId(String helloId) {
-		this.helloId = helloId;
+	public void setHelloId(String helloId,String helloId2) {
+		this.helloId = helloId+helloId2;
 	}
 
 	public String getHelloName() {

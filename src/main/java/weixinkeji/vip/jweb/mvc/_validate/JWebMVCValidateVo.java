@@ -5,7 +5,7 @@ public class JWebMVCValidateVo {
 	public final String regex;
 	public final String errorMessage;
 	public final boolean alloyNull;
-
+	
 	/**
 	 * 构造方法
 	 * 

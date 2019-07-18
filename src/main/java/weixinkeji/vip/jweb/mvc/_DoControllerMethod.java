@@ -1,10 +1,10 @@
 package weixinkeji.vip.jweb.mvc;
 
 import weixinkeji.vip.jweb.mvc.ann.request.JWebGet;
+import weixinkeji.vip.jweb.mvc._validate.ann.BingRegex;
+import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.ann.request.JWebController;
 import weixinkeji.vip.jweb.mvc.ann.request.ParamKey;
-import weixinkeji.vip.jweb.mvc.ann.validate.BingRegex;
-import weixinkeji.vip.jweb.mvc.ann.validate.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
 
 @JWebController("/test")

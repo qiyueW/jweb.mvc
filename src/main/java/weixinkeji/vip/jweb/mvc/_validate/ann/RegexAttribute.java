@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.ann.validate;
+package weixinkeji.vip.jweb.mvc._validate.ann;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

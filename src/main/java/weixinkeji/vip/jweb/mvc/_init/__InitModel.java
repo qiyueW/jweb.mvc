@@ -17,7 +17,7 @@ public abstract class __InitModel {
 	 *  需要扫描类的集合
 	 * @param list 扫描到的类
 	 */
-	__InitModel(List<Class<?>> list) {
+	protected __InitModel(List<Class<?>> list) {
 		this.list = list;
 	}
 
@@ -31,7 +31,7 @@ public abstract class __InitModel {
 	 * @return T
 	 */
 	@SuppressWarnings("unchecked")
-	<T> T findObject(Class<T> yourClass, T obj) {
+	protected <T> T findObject(Class<T> yourClass, T obj) {
 		for (Class<?> c : list) {
 			// 从集合中，找到实现了IPublicSystemInterfaceConfig接口的类。
 			if (yourClass.isAssignableFrom(c) && !c.equals(yourClass)) {

@@ -3,7 +3,7 @@ package weixinkeji.vip.jweb.mvc.model;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import weixinkeji.vip.jweb.mvc.vo.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.mvc._validate.JWebMVCValidateVo;
 
 /**
  * Controller方法 参数模型

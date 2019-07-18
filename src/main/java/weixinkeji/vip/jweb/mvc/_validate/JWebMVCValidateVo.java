@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.vo;
+package weixinkeji.vip.jweb.mvc._validate;
 
 public class JWebMVCValidateVo {
 

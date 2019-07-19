@@ -1,7 +1,10 @@
 package weixinkeji.vip.jweb.mvc.bean;
 
+import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
+
 public class Hello {
 
+	@BindRegex(regex = "[0-9] {??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "主键")
 	private String helloId;
 	private String helloName;
 
@@ -9,8 +12,8 @@ public class Hello {
 		return helloId;
 	}
 
-	public void setHelloId(String helloId,String helloId2) {
-		this.helloId = helloId+helloId2;
+	public void setHelloId(String helloId, String helloId2) {
+		this.helloId = helloId + helloId2;
 	}
 
 	public String getHelloName() {

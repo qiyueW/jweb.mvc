@@ -1,8 +1,12 @@
 package weixinkeji.vip.jweb.mvc._validate;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
+import java.util.HashMap;
+import java.util.Map;
 
-import weixinkeji.vip.jweb.mvc._validate.ann.BingRegex;
+import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
+import weixinkeji.vip.jweb.mvc.bean.Hello;
 
 class Tools {
 	/**
@@ -34,6 +38,7 @@ class Tools {
 		}
 	}
 
+	// ----------------------------------------------
 	/**
 	 * 取得java官方基本类型 绑定的校验数据
 	 * 
@@ -41,8 +46,73 @@ class Tools {
 	 * @return JWebMVCValidateVo 校验数据
 	 */
 	static JWebMVCValidateVo getJWebMVCValidateVo_fromJavaBaseParamter(Parameter pobj) {
-		return getRegex(pobj.getAnnotation(BingRegex.class));
+		return getRegex(pobj.getAnnotation(BindRegex.class), null);
 	}
+
+	/**
+	 * 取得vo对象的检验集合
+	 * 
+	 * @param c vo类
+	 * @return Map<String, JWebMVCValidateVo>
+	 */
+	static Map<String, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c) {
+		Map<String, JWebMVCValidateVo> map = new HashMap<String, JWebMVCValidateVo>();
+		Field[] fsObj = c.getDeclaredFields();
+		JWebMVCValidateVo vo;
+		for (Field fs : fsObj) {
+			if (null != (vo = getRegex(fs.getAnnotation(BindRegex.class), null))) {
+				map.put(fs.getName(), vo);
+				System.out.println(
+						"收集到：" + fs.getName() + ", " + vo.regex + "//" + vo.errorMessage + "//" + vo.alloyNull);
+			}
+		}
+		return map;
+	}
+
+	/**
+	 * 取得vo对象的检验集合
+	 * 
+	 * @param c        vo类
+	 * @param webParam 改写指定字段，是否为必填项。 语法： {字段名=true|false}
+	 * @return Map<String, JWebMVCValidateVo>
+	 */
+	static Map<String, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
+		Map<String, JWebMVCValidateVo> map = new HashMap<String, JWebMVCValidateVo>();
+		Map<String, Boolean> lockAlloyNull = new HashMap<String, Boolean>();
+		if (null != webParam && webParam.length > 0) {
+			String kv[];
+			for (String kvStr : webParam) {
+				if (null == kvStr || kvStr.trim().equalsIgnoreCase("")) {
+					continue;
+				}
+				kv = kvStr.trim().split("=");
+				if (kv.length == 1) {
+					lockAlloyNull.put(kv[0].trim(), false);
+				} else if (kv[1].trim().equalsIgnoreCase("")) {
+					lockAlloyNull.put(kv[0].trim(), false);
+				} else {
+					lockAlloyNull.put(kv[0].trim(), Boolean.parseBoolean(kv[1]));
+				}
+			}
+		}
+		Field[] fsObj = c.getDeclaredFields();
+
+		JWebMVCValidateVo vo;
+		for (Field fs : fsObj) {
+			// 字段名，当作key
+			if (null != (vo = getRegex(fs.getAnnotation(BindRegex.class), lockAlloyNull.get(fs.getName())))) {
+				map.put(fs.getName(), vo);
+				System.out.println(
+						"收集到：" + fs.getName() + ", " + vo.regex + "//" + vo.errorMessage + "//" + vo.alloyNull);
+			}
+		}
+		return map;
+	}
+
+	public static void main(String args[]) {
+		getJWebMVCValidateVo_fromVo(Hello.class, new String[] { "" });
+	}
+	// ----------------------------------------------
 
 	/**
 	 * 取得属性上的校验数据
@@ -50,7 +120,7 @@ class Tools {
 	 * @param br BingRegex
 	 * @return JWebMVCValidateVo
 	 */
-	static JWebMVCValidateVo getRegex(BingRegex br) {
+	static JWebMVCValidateVo getRegex(BindRegex br, Boolean orderAlloyNull) {
 		if (null == br) {
 			return null;
 		}
@@ -67,6 +137,9 @@ class Tools {
 			if (br.refAlloyNull() == RegexNullType.unknow) {// 如果用户填写是否允许null，则用引用的
 				alloyNull = ref.alloyNull;
 			}
+		}
+		if (null != orderAlloyNull) {
+			alloyNull = orderAlloyNull;
 		}
 		regex = formatStrByPlaceholder(regex, placeholder);// 占位符处理
 		return new JWebMVCValidateVo(regex, error, alloyNull);

@@ -19,7 +19,7 @@ import weixinkeji.vip.jweb.mvc._validate.RegexNullType;
  */
 @Retention(RUNTIME)
 @Target({ FIELD, PARAMETER })
-public @interface BingRegex {
+public @interface BindRegex {
 
 	/**
 	 * 正则表达式

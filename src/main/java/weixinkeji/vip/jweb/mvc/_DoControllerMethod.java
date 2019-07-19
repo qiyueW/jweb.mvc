@@ -1,7 +1,7 @@
 package weixinkeji.vip.jweb.mvc;
 
 import weixinkeji.vip.jweb.mvc.ann.request.JWebGet;
-import weixinkeji.vip.jweb.mvc._validate.ann.BingRegex;
+import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
 import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.ann.request.JWebController;
 import weixinkeji.vip.jweb.mvc.ann.request.ParamKey;
@@ -15,7 +15,7 @@ public class _DoControllerMethod {
 			//表示对Hello属性id，改写校验属性，alloyNull,让其允许为null  
 			//同时，表达参数时，key=hello,如果不指定接收参数的key,默认key=变量名obj
 			@RegexAttribute(fieldsAlloyNull = { "id=true"}) @ParamKey("hello") Hello obj,
-			@BingRegex(regex ="正则表达式") String wo
+			@BindRegex(regex ="正则表达式") String wo
 			) {
 		jw.setAttribute("key", "value");
 		

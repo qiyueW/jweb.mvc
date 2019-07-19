@@ -31,7 +31,6 @@ public class ValidateFactory {
 		}
 		kv=new HashMap<>();
 		
-		
 		voValidate.put(c, kv);
 		return kv;
 	}

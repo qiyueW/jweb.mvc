@@ -1,10 +1,13 @@
 package weixinkeji.vip.jweb.mvc._validate;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
 
+import weixinkeji.vip.jweb.mvc._DoControllerMethod;
 import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
+import weixinkeji.vip.jweb.mvc.bean.Hello;
 
 /**
  * Controller方法 参数模型
@@ -40,9 +43,8 @@ public class ParameterValidateModel {
 	}
 
 	public final Class<?> parameTerType;// 参数类型
-	// 參數綁定的校驗
-	public final Map<String, JWebMVCValidateVo> validate_ClassField;
-	private final Field[] fs = {};
+	// vo-属性关联的校验数据
+	public final Map<Field, JWebMVCValidateVo> validate_ClassField;
 
 	// 普通類型綁定的校驗
 	public final JWebMVCValidateVo onValidate;
@@ -69,11 +71,15 @@ public class ParameterValidateModel {
 	}
 
 	public boolean check(Object obj) {
+
 		// 不校验的
 		if (checkType == paramCheckType.noCheck.code) {
 			return true;
+		} else if (checkType == paramCheckType.javaType.code) {
+			return checkByJavaBaseType(obj);
+		} else {
+			return checByVo(obj);
 		}
-		return false;
 	}
 
 	// java基本类型的校验
@@ -86,8 +92,41 @@ public class ParameterValidateModel {
 
 	// 用户vo校验
 	private boolean checByVo(Object obj) {
-		
-		return false;
+		if (null == obj) {
+			return this.validate_ClassField.isEmpty();// 传来的对象是null,同时，用户没有强制校验项，返回true
+		}
+		Object ovalue;
+		for (Map.Entry<Field, JWebMVCValidateVo> kv : this.validate_ClassField.entrySet()) {
+			try {
+				ovalue = kv.getKey().get(obj);
+				if (null == ovalue) {
+					return kv.getValue().alloyNull;
+				}
+				if (!ovalue.toString().matches(kv.getValue().regex)) {
+					return false;
+				}
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
+	public static void main(String args[]) {
+		Method[] ms = _DoControllerMethod.class.getDeclaredMethods();
+		for (Method m : ms) {
+			System.out.println("方法名：" + m.getName() + "//" + m.getModifiers() + "//" + m.getParameterCount());
+			for (Parameter p : m.getParameters()) {
+				System.out.println(p + "=" + p.getModifiers() + "//" + p.getName() + "//" + p.getClass() + p.getType());
+				ParameterValidateModel model = new ParameterValidateModel(p);
+				if (p.getType() == Hello.class) {
+					Hello obj = new Hello();
+					obj.setHelloId("1", "2");
+					obj.setHelloName("ab", 1, null);
+					System.out.println(model.check(obj));
+				}
+			}
+		}
+
+	}
 }

@@ -56,12 +56,12 @@ final public class ClassFieldsModel {
 	 * @return FieldModel[] 类的属性模型
 	 */
 	synchronized public static FieldModel[] getFieldModel(Class<?> c) {
-		FieldModel[] fms = CFM.get(c);
-		if (null == fms) {
-			fms = loadClassFieldModels(c);
-			CFM.put(c, fms);
+		FieldModel[] model = CFM.get(c);
+		if (null == model) {
+			model = loadClassFieldModels(c);
+			CFM.put(c, model);
 		}
-		return fms;
+		return model;
 	}
 	
 	/**
@@ -70,12 +70,12 @@ final public class ClassFieldsModel {
 	 * @return MethodModel[] 类的方法模型
 	 */
 	synchronized public static MethodModel[] getMethodModel(Class<?> c) {
-		MethodModel[] fms = CMM.get(c);
-		if (null == fms) {
-			fms = loadMethodModels(c);
-			CMM.put(c, fms);
+		MethodModel[] model = CMM.get(c);
+		if (null == model) {
+			model = loadMethodModels(c);
+			CMM.put(c, model);
 		}
-		return fms;
+		return model;
 	}
 //---------------------------------------------------------------------	
 	// 初始化-加载-字段模型 不考虑父类的字段

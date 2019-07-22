@@ -14,7 +14,7 @@ final public class ClassFieldsModel {
 
 	public ClassFieldsModel(Class<?> c) {
 		this.fieldModels = getFieldModel(c);
-		this.methodsModels = CMM.get(c);
+		this.methodsModels = getMethodModel(c);
 	}
 
 	/**

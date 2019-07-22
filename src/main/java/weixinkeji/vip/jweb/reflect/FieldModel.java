@@ -23,7 +23,7 @@ public class FieldModel {
 	/**
 	 * 类属性 类型
 	 */
-	public final fieldType type;
+	public final JavaType type;
 
 	/**
 	 * 类属性 时间格式（仅当是Date类型的属性时，才有效），默认是 yyyy-MM-dd
@@ -47,43 +47,38 @@ public class FieldModel {
 		this.dateFormat = dateFormat;
 	}
 
-	enum fieldType {
-		type_String, type_boolean, type_Boolean, type_short, type_Short, type_int, type_Integer, type_long, type_Long,
-		type_float, type_Float, type_double, type_Double, type_Date, type_noJavaBaseType
-	}
-
-	private fieldType getFileType(Field f) {
+	private JavaType getFileType(Field f) {
 		switch (f.getType().getSimpleName()) {
 		case "String":
-			return fieldType.type_String;
+			return JavaType.type_String;
 		case "boolean":
-			return fieldType.type_boolean;
+			return JavaType.type_boolean;
 		case "Boolean":
-			return fieldType.type_Boolean;
+			return JavaType.type_Boolean;
 		case "short":
-			return fieldType.type_short;
+			return JavaType.type_short;
 		case "Short":
-			return fieldType.type_Short;
+			return JavaType.type_Short;
 		case "int":
-			return fieldType.type_int;
+			return JavaType.type_int;
 		case "Integer":
-			return fieldType.type_Integer;
+			return JavaType.type_Integer;
 		case "long":
-			return fieldType.type_long;
+			return JavaType.type_long;
 		case "Long":
-			return fieldType.type_Long;
+			return JavaType.type_Long;
 		case "float":
-			return fieldType.type_float;
+			return JavaType.type_float;
 		case "Float":
-			return fieldType.type_Float;
+			return JavaType.type_Float;
 		case "double":
-			return fieldType.type_double;
+			return JavaType.type_double;
 		case "Double":
-			return fieldType.type_Double;
+			return JavaType.type_Double;
 		case "Date":
-			return fieldType.type_Date;
+			return JavaType.type_Date;
 		default:
-			return fieldType.type_noJavaBaseType;
+			return JavaType.type_noJavaBaseType;
 		}
 	}
 

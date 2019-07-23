@@ -7,6 +7,7 @@ import java.util.Map;
 
 import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
+import weixinkeji.vip.jweb.reflect.FieldModel;
 
 class Tools {
 	/**
@@ -76,8 +77,8 @@ class Tools {
 	 * @param webParam 改写指定字段，是否为必填项。 语法： {字段名=true|false}
 	 * @return Map<Field, JWebMVCValidateVo>
 	 */
-	static Map<Field, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
-		Map<Field, JWebMVCValidateVo> map = new HashMap<Field, JWebMVCValidateVo>();
+	static Map<FieldModel, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
+		Map<FieldModel, JWebMVCValidateVo> map = new HashMap<FieldModel, JWebMVCValidateVo>();
 		Map<String, Boolean> lockAlloyNull = new HashMap<String, Boolean>();
 		if (null != webParam && webParam.length > 0) {
 			String kv[];
@@ -96,12 +97,12 @@ class Tools {
 			}
 		}
 		Field[] fsObj = c.getDeclaredFields();
-		
+
 		JWebMVCValidateVo vo;
 		for (Field fs : fsObj) {
 			// 字段名，当作key
 			if (null != (vo = getRegex(fs.getAnnotation(BindRegex.class), lockAlloyNull.get(fs.getName())))) {
-				map.put(fs, vo);
+				map.put(new FieldModel(fs), vo);
 				fs.setAccessible(true);
 				System.out.println(
 						"收集到：" + fs.getName() + ", " + vo.regex + "//" + vo.errorMessage + "//" + vo.alloyNull);

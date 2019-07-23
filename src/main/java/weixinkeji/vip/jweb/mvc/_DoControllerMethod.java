@@ -15,7 +15,7 @@ public class _DoControllerMethod {
 			//表示对Hello属性id，改写校验属性，alloyNull,让其允许为null  
 			//同时，表达参数时，key=hello,如果不指定接收参数的key,默认key=变量名obj
 			@RegexAttribute(fieldsAlloyNull = { "id2=true"}) @ParamKey("hello") Hello obj,
-			@BindRegex(regex ="正则表达式") String wo
+			@BindRegex(regex ="[0-9]+") String wo
 			) {
 		jw.setAttribute("key", "value");
 		

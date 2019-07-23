@@ -4,15 +4,15 @@ import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
 
 public class Hello {
 
-//	@BindRegex(regex = "[0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "主键")
+	@BindRegex(regex = "[0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "主键")
 	private String helloId;
-//	@BindRegex(regex = "[a-z0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "名称")
+	@BindRegex(regex = "[a-z0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "名称")
 	private String helloName;
 
-//	@BindRegex(regex = "[0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "名称")
+	@BindRegex(regex = "[0-9]{??1,??2}", placeholder = { "1", "2" }, alloyNull = false, error = "名称")
 	private int age=1;
 	
-//	@BindRegex(regex = "[0-9.]{??1,??2}", placeholder = { "1", "4" }, alloyNull = false, error = "名称")
+	@BindRegex(regex = "[0-9.]{??1,??2}", placeholder = { "1", "4" }, alloyNull = false, error = "名称")
 	private double num2=11.1;
 	
 	@BindRegex
@@ -39,8 +39,8 @@ public class Hello {
 		return helloId;
 	}
 
-	public void setHelloId(String helloId, String helloId2) {
-		this.helloId = helloId + helloId2;
+	public void setHelloId(String helloId) {
+		this.helloId = helloId;
 	}
 
 	public String getHelloName() {

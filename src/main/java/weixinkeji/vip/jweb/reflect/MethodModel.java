@@ -1,6 +1,7 @@
 package weixinkeji.vip.jweb.reflect;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 public class MethodModel {
 
@@ -43,7 +44,13 @@ public class MethodModel {
 		this.methodKey = m.getName();
 		this.type = m.getModifiers();
 		this.parameterCount = m.getParameterCount();
-		this.yourParameters = null;
+		this.yourParameters = new ParameterModel[m.getParameterCount()];
+		
+		Parameter[] ps = m.getParameters();
+		for (int i = 0; i < m.getParameterCount(); i++) {
+			this.yourParameters[i] = new ParameterModel(ps[i]);
+		}
+		
 		this.args = this.parameterCount == 0 ? null : new Object[this.parameterCount];
 		this.isNullParameter = null == this.args;
 	}

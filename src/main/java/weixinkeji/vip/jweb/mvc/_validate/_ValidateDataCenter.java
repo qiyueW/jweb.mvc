@@ -34,7 +34,7 @@ public class _ValidateDataCenter {
 	/**
 	 * 初始化
 	 * 
-	 * @param list
+	 * @param list 类集合
 	 */
 	synchronized public static void _0_init(List<Class<?>> list) {
 		if (isInit) {

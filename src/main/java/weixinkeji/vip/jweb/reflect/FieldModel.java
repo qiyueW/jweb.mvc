@@ -85,6 +85,7 @@ public class FieldModel {
 	public <T extends Annotation> boolean isHasAnnotation(Class<T> annotationClass) {
 		return null == this.field.getAnnotation(annotationClass);
 	}
+
 	public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
 		return this.field.getAnnotation(annotationClass);
 	}
@@ -151,32 +152,33 @@ public class FieldModel {
 	 * @throws Exception 异常
 	 */
 	public Object getFieldValue(Object obj) throws Exception {
-		switch (this.type) {
-		case type_String:
-			return field.get(obj);
-		case type_boolean:
-		case type_Boolean:
-			return field.getBoolean(obj);
-		case type_short:
-		case type_Short:
-			return field.getShort(obj);
-		case type_int:
-		case type_Integer:
-			return field.getInt(obj);
-		case type_long:
-		case type_Long:
-			return field.getLong(obj);
-		case type_float:
-		case type_Float:
-			return field.getFloat(obj);
-		case type_double:
-		case type_Double:
-			return field.getDouble(obj);
-		case type_Date:
-			return field.get(obj);
-		default:
-			return field.get(obj);
-		}
+		return this.field.get(obj);
+//		switch (this.type) {
+//		case type_String:
+//			return field.get(obj);
+//		case type_boolean:
+//		case type_Boolean:
+//			return field.getBoolean(obj);
+//		case type_short:
+//		case type_Short:
+//			return field.getShort(obj);
+//		case type_int:
+//		case type_Integer:
+//			return field.getInt(obj);
+//		case type_long:
+//		case type_Long:
+//			return field.getLong(obj);
+//		case type_float:
+//		case type_Float:
+//			return field.getFloat(obj);
+//		case type_double:
+//		case type_Double:
+//			return field.getDouble(obj);
+//		case type_Date:
+//			return field.get(obj);
+//		default:
+//			return field.get(obj);
+//		}
 	}
 
 }

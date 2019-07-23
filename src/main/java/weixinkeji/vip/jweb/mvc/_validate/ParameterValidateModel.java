@@ -8,6 +8,8 @@ import java.util.Map;
 import weixinkeji.vip.jweb.mvc._DoControllerMethod;
 import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
+import weixinkeji.vip.jweb.reflect.FieldModel;
+import weixinkeji.vip.jweb.reflect.ParameterModel;
 
 /**
  * Controller方法 参数模型
@@ -41,17 +43,16 @@ public class ParameterValidateModel {
 			this.code = i;
 		}
 	}
-
-	public final Class<?> parameTerType;// 参数类型
+	public final ParameterModel pModel;
 	// vo-属性关联的校验数据
-	public final Map<Field, JWebMVCValidateVo> validate_ClassField;
+	public final Map<FieldModel, JWebMVCValidateVo> validate_ClassField;
 
 	// 普通類型綁定的校驗
 	public final JWebMVCValidateVo onValidate;
-	private final int checkType;
+	public final int checkType;
 
 	public ParameterValidateModel(Parameter pobj) {
-		this.parameTerType = pobj.getType();
+		pModel=new ParameterModel(pobj);
 		if (Tools.isJavaBaseType(pobj.getType())) {
 			this.validate_ClassField = null;
 			this.onValidate = Tools.getJWebMVCValidateVo_fromJavaBaseParamter(pobj);
@@ -96,20 +97,27 @@ public class ParameterValidateModel {
 			return this.validate_ClassField.isEmpty();// 传来的对象是null,同时，用户没有强制校验项，返回true
 		}
 		Object ovalue;
-		for (Map.Entry<Field, JWebMVCValidateVo> kv : this.validate_ClassField.entrySet()) {
+		boolean rs=false;
+		for (Map.Entry<FieldModel, JWebMVCValidateVo> kv : this.validate_ClassField.entrySet()) {
 			try {
-				ovalue = kv.getKey().get(obj);
+				ovalue = kv.getKey().getFieldValue(obj);
 				if (null == ovalue) {
-					return kv.getValue().alloyNull;
+//					return kv.getValue().alloyNull;
+					System.out.println(kv.getKey().fieldKey+"校验失败");
+					continue;
 				}
 				if (!ovalue.toString().matches(kv.getValue().regex)) {
-					return false;
+//					return false;
+					System.out.println(kv.getKey().fieldKey+"校验失败");
+					continue;
 				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
+				System.out.println(kv.getKey().fieldKey+"校验成功！");
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		return rs;
+//		return true;
 	}
 
 	public static void main(String args[]) {
@@ -121,7 +129,7 @@ public class ParameterValidateModel {
 				ParameterValidateModel model = new ParameterValidateModel(p);
 				if (p.getType() == Hello.class) {
 					Hello obj = new Hello();
-					obj.setHelloId("1", "2");
+					obj.setHelloId("1");
 					obj.setHelloName("ab", 1, null);
 					System.out.println(model.check(obj));
 				}

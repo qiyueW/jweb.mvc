@@ -20,6 +20,13 @@ import weixinkeji.vip.jweb.mvc._validate.RegexNullType;
 @Retention(RUNTIME)
 @Target({ FIELD, PARAMETER })
 public @interface BindRegex {
+	
+	/**
+	 * 返回校验结果时，显示的字段名。默认与参数名或属性名一样
+	 * 
+	 * @return
+	 */
+	public String keyName() default "";
 
 	/**
 	 * 正则表达式

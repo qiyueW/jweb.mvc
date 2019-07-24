@@ -31,7 +31,7 @@ public class _0_init_validateLib extends __InitModel {
 	}
 	
 	private void initSysConfig(Map<String, JWebMVCValidateVo> sysValidationLib ) {
-		sysValidationLib.put("sysEmail", new JWebMVCValidateVo("",""));
+		sysValidationLib.put("sysEmail", new JWebMVCValidateVo("keyName","regex",""));
 		
 	}
 	

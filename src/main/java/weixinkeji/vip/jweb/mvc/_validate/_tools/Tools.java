@@ -9,8 +9,6 @@ import weixinkeji.vip.jweb.mvc._validate.RegexNullType;
 import weixinkeji.vip.jweb.mvc._validate._common.JWebMVCValidateVo;
 import weixinkeji.vip.jweb.mvc._validate._common._ValidateDataCenter;
 import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
-import weixinkeji.vip.jweb.mvc.bean.Hello;
-import weixinkeji.vip.jweb.reflect.FieldModel;
 
 public class Tools {
 	/**
@@ -50,7 +48,7 @@ public class Tools {
 	 * @return JWebMVCValidateVo 校验数据
 	 */
 	public static JWebMVCValidateVo getJWebMVCValidateVo_fromJavaBaseParamter(Parameter pobj) {
-		return getRegex(pobj.getAnnotation(BindRegex.class), null);
+		return getRegex(pobj.getName(), pobj.getAnnotation(BindRegex.class), null);
 	}
 
 	/**
@@ -64,8 +62,9 @@ public class Tools {
 		Field[] fsObj = c.getDeclaredFields();
 		JWebMVCValidateVo vo;
 		for (Field fs : fsObj) {
-			if (null != (vo = getRegex(fs.getAnnotation(BindRegex.class), null))) {
+			if (null != (vo = getRegex(fs.getName(), fs.getAnnotation(BindRegex.class), null))) {
 				map.put(fs, vo);
+				fs.setAccessible(true);
 				System.out.println(
 						"收集到：" + fs.getName() + ", " + vo.regex + "//" + vo.errorMessage + "//" + vo.alloyNull);
 			}
@@ -80,8 +79,8 @@ public class Tools {
 	 * @param webParam 改写指定字段，是否为必填项。 语法： {字段名=true|false}
 	 * @return Map<Field, JWebMVCValidateVo>
 	 */
-	public static Map<FieldModel, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
-		Map<FieldModel, JWebMVCValidateVo> map = new HashMap<FieldModel, JWebMVCValidateVo>();
+	public static Map<Field, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
+		Map<Field, JWebMVCValidateVo> map = new HashMap<Field, JWebMVCValidateVo>();
 		Map<String, Boolean> lockAlloyNull = new HashMap<String, Boolean>();
 		if (null != webParam && webParam.length > 0) {
 			String kv[];
@@ -104,8 +103,9 @@ public class Tools {
 		JWebMVCValidateVo vo;
 		for (Field fs : fsObj) {
 			// 字段名，当作key
-			if (null != (vo = getRegex(fs.getAnnotation(BindRegex.class), lockAlloyNull.get(fs.getName())))) {
-				map.put(new FieldModel(fs), vo);
+			if (null != (vo = getRegex(fs.getName(), fs.getAnnotation(BindRegex.class),
+					lockAlloyNull.get(fs.getName())))) {
+				map.put(fs, vo);
 				fs.setAccessible(true);
 				System.out.println(
 						"收集到：" + fs.getName() + ", " + vo.regex + "//" + vo.errorMessage + "//" + vo.alloyNull);
@@ -114,24 +114,25 @@ public class Tools {
 		return map;
 	}
 
-	public static void main(String args[]) {
-		getJWebMVCValidateVo_fromVo(Hello.class, new String[] { "" });
-	}
-	// ----------------------------------------------
-
 	/**
 	 * 取得属性上的校验数据
 	 * 
 	 * @param br BingRegex
 	 * @return JWebMVCValidateVo
 	 */
-	static JWebMVCValidateVo getRegex(BindRegex br, Boolean orderAlloyNull) {
+	static JWebMVCValidateVo getRegex(String viewKeyName, BindRegex br, Boolean orderAlloyNull) {
 		if (null == br) {
 			return null;
 		}
+
+		String keyName = br.keyName();// 返回结果，显示的结果名
 		String regex = br.regex();// 正则表达式
 		String error = br.error();// 错误信息
 		boolean alloyNull = br.alloyNull();// 是否允许null;
+
+		if (null == keyName || keyName.trim().isEmpty()) {
+			keyName = viewKeyName;
+		}
 		String[] placeholder = br.placeholder();
 		JWebMVCValidateVo ref = _ValidateDataCenter.getJWebMVCValidateVoByRegexKey(regex);
 		if (null != ref) {// 表示 不是引用公共库的表达式
@@ -147,7 +148,7 @@ public class Tools {
 			alloyNull = orderAlloyNull;
 		}
 		regex = formatStrByPlaceholder(regex, placeholder);// 占位符处理
-		return new JWebMVCValidateVo(regex, error, alloyNull);
+		return new JWebMVCValidateVo(keyName, regex, error, alloyNull);
 	}
 
 	/**

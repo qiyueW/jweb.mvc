@@ -33,7 +33,7 @@ public class VoValidateModel {
 	}
 
 	// 用户vo校验
-	private ValidateResult checByVo(Object obj) {
+	private ValidateResult checByVo(Object obj,boolean errorReturn) {
 		ValidateResult vd = new ValidateResult();
 		if (null == obj) {
 			return vd;
@@ -47,7 +47,6 @@ public class VoValidateModel {
 					vd.addError(kv.getKey().fieldKey, kv.getValue().errorMessage);
 					continue;
 				}
-				System.out.println(kv.getKey().fieldKey + "校验成功！");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

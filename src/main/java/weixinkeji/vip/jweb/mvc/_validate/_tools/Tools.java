@@ -1,15 +1,18 @@
-package weixinkeji.vip.jweb.mvc._validate;
+package weixinkeji.vip.jweb.mvc._validate._tools;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
+import weixinkeji.vip.jweb.mvc._validate.RegexNullType;
+import weixinkeji.vip.jweb.mvc._validate._common.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.mvc._validate._common._ValidateDataCenter;
 import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
 import weixinkeji.vip.jweb.reflect.FieldModel;
 
-class Tools {
+public class Tools {
 	/**
 	 * 是否java基本类型
 	 * 
@@ -17,7 +20,7 @@ class Tools {
 	 * @return boolean
 	 * @throws Exception
 	 */
-	static boolean isJavaBaseType(Class<?> type) {
+	public static boolean isJavaBaseType(Class<?> type) {
 		switch (type.getSimpleName()) {
 		case "String":
 		case "boolean":
@@ -46,7 +49,7 @@ class Tools {
 	 * @param pobj 参数
 	 * @return JWebMVCValidateVo 校验数据
 	 */
-	static JWebMVCValidateVo getJWebMVCValidateVo_fromJavaBaseParamter(Parameter pobj) {
+	public static JWebMVCValidateVo getJWebMVCValidateVo_fromJavaBaseParamter(Parameter pobj) {
 		return getRegex(pobj.getAnnotation(BindRegex.class), null);
 	}
 
@@ -56,7 +59,7 @@ class Tools {
 	 * @param c vo类
 	 * @return Map<Field, JWebMVCValidateVo>
 	 */
-	static Map<Field, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c) {
+	public static Map<Field, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c) {
 		Map<Field, JWebMVCValidateVo> map = new HashMap<Field, JWebMVCValidateVo>();
 		Field[] fsObj = c.getDeclaredFields();
 		JWebMVCValidateVo vo;
@@ -77,7 +80,7 @@ class Tools {
 	 * @param webParam 改写指定字段，是否为必填项。 语法： {字段名=true|false}
 	 * @return Map<Field, JWebMVCValidateVo>
 	 */
-	static Map<FieldModel, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
+	public static Map<FieldModel, JWebMVCValidateVo> getJWebMVCValidateVo_fromVo(Class<?> c, String[] webParam) {
 		Map<FieldModel, JWebMVCValidateVo> map = new HashMap<FieldModel, JWebMVCValidateVo>();
 		Map<String, Boolean> lockAlloyNull = new HashMap<String, Boolean>();
 		if (null != webParam && webParam.length > 0) {

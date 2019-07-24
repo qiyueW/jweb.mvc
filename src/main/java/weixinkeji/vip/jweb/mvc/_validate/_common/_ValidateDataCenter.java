@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._validate;
+package weixinkeji.vip.jweb.mvc._validate._common;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;

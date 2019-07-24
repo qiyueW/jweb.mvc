@@ -1,0 +1,60 @@
+package weixinkeji.vip.jweb.mvc._validate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ValidateResult {
+
+	/**
+	 * 错误的数量
+	 */
+	private int errorCount=0;
+
+	/**
+	 * 错误的数据集合
+	 */
+	private List<String[]> voError = new ArrayList<>();
+
+	/**
+	 * 添加一个错误
+	 * 
+	 * @param name    字段名
+	 * @param message 错误提示
+	 */
+	public void addError(String name, String message) {
+		this.errorCount++;
+		this.voError.add(new String[] { name, message });
+	}
+
+	/**
+	 * 把结果变成json格式的数据
+	 * 
+	 * @return String
+	 */
+	public String toJsonStrs() {
+		if (errorCount == 0) {
+			return "[]";
+		}
+		StringBuilder sb = new StringBuilder();
+		String[] rs;
+		if (this.errorCount == 1) {
+			rs = voError.get(0);
+			sb.append("[");
+			this.addToJson(sb, rs[0], rs[1]);
+			sb.append("]");
+			return sb.toString();
+		}
+		for (int i = 0; i < this.errorCount; i++) {
+			rs = this.voError.get(i);
+			sb.append(",");
+			this.addToJson(sb, rs[0], rs[1]);
+		}
+		return "[" + sb.substring(1) + "]";
+	}
+
+	private void addToJson(StringBuilder sb, String fieldName, String error) {
+		sb.append("{\"fieldName\":\"").append(fieldName).append("\"").append(",\"message\":\"")
+				.append(null == error ? "" : error).append("\"}");
+	}
+
+}

@@ -1,11 +1,11 @@
 package weixinkeji.vip.jweb.mvc;
 
 import weixinkeji.vip.jweb.mvc.ann.request.JWebGet;
-import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
-import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.ann.request.JWebController;
 import weixinkeji.vip.jweb.mvc.ann.request.ParamKey;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
+import weixinkeji.vip.jweb.validate.ann.BindRegex;
+import weixinkeji.vip.jweb.validate.ann.RegexAttribute;
 
 @JWebController("/test")
 public class _DoControllerMethod {

@@ -1,6 +1,6 @@
 package weixinkeji.vip.jweb.mvc.bean;
 
-import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
+import weixinkeji.vip.jweb.validate.ann.BindRegex;
 
 public class Hello {
 

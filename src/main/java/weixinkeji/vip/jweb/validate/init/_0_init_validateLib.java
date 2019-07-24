@@ -1,12 +1,12 @@
-package weixinkeji.vip.jweb.mvc._validate.init;
+package weixinkeji.vip.jweb.validate.init;
 
 import java.util.List;
 import java.util.Map;
 
 import weixinkeji.vip.jweb.mvc._init.__InitModel;
-import weixinkeji.vip.jweb.mvc._validate._common.JWebMVCValidateVo;
-import weixinkeji.vip.jweb.mvc._validate.config.JWebMVCValidateLib;
-import weixinkeji.vip.jweb.mvc._validate.config.JWebMVCValidateLibImpl;
+import weixinkeji.vip.jweb.validate._common.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.validate.config.JWebMVCValidateLib;
+import weixinkeji.vip.jweb.validate.config.JWebMVCValidateLibImpl;
 
 public class _0_init_validateLib extends __InitModel {
 	/**

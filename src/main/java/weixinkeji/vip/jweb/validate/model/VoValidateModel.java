@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._validate.model;
+package weixinkeji.vip.jweb.validate.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import weixinkeji.vip.jweb.mvc._DoControllerMethod;
-import weixinkeji.vip.jweb.mvc._validate.ValidateResult;
-import weixinkeji.vip.jweb.mvc._validate._common.JWebMVCValidateVo;
-import weixinkeji.vip.jweb.mvc._validate._tools.Tools;
-import weixinkeji.vip.jweb.mvc._validate.ann.RegexAttribute;
 import weixinkeji.vip.jweb.mvc.bean.Hello;
+import weixinkeji.vip.jweb.validate.ValidateResult;
+import weixinkeji.vip.jweb.validate._common.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.validate._tools.Tools;
+import weixinkeji.vip.jweb.validate.ann.RegexAttribute;
 
 /**
  * Vo校验模型

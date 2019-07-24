@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._validate._common;
+package weixinkeji.vip.jweb.validate._common;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import weixinkeji.vip.jweb.mvc._validate.init._0_init_validateLib;
 import weixinkeji.vip.jweb.scan.JWPScanClassFactory;
+import weixinkeji.vip.jweb.validate.init._0_init_validateLib;
 
 public class _ValidateDataCenter {
 	/**

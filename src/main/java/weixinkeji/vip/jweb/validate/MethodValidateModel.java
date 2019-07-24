@@ -1,3 +1,4 @@
+package weixinkeji.vip.jweb.validate;
 //package weixinkeji.vip.jweb.mvc._validate;
 //
 //import java.lang.reflect.Method;

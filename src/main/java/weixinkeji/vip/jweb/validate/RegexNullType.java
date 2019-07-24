@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._validate;
+package weixinkeji.vip.jweb.validate;
 
 public enum RegexNullType {
 	alloyNull,notAlloyNull,unknow

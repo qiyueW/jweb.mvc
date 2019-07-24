@@ -1,14 +1,14 @@
-package weixinkeji.vip.jweb.mvc._validate._tools;
+package weixinkeji.vip.jweb.validate._tools;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
-import weixinkeji.vip.jweb.mvc._validate.RegexNullType;
-import weixinkeji.vip.jweb.mvc._validate._common.JWebMVCValidateVo;
-import weixinkeji.vip.jweb.mvc._validate._common._ValidateDataCenter;
-import weixinkeji.vip.jweb.mvc._validate.ann.BindRegex;
+import weixinkeji.vip.jweb.validate.RegexNullType;
+import weixinkeji.vip.jweb.validate._common.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.validate._common._ValidateDataCenter;
+import weixinkeji.vip.jweb.validate.ann.BindRegex;
 
 public class Tools {
 	/**

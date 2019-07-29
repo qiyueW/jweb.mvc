@@ -29,6 +29,12 @@ public class ConvertCenter {
 		cc.regConverCenter(new ShortDefault());
 	}
 
+	/**
+	 * 注册一个 ConvertCenter
+	 * 
+	 * @param obj ConvertCenter实例
+	 * @return ConvertCenter
+	 */
 	public ConvertCenter regConverCenter(MvcStringDataConver<?> obj) {
 		Class<?> c = this.getMethodT(obj);
 		if (c == Boolean.class) {
@@ -48,10 +54,17 @@ public class ConvertCenter {
 		return this;
 	}
 
+	/**
+	 * 取得类型转换处理实例
+	 * 
+	 * @param c 类型（要转成的类型）
+	 * @return MvcStringDataConver处理实例
+	 */
 	public MvcStringDataConver<?> getMvcDataConver(Class<?> c) {
 		return convertDo.get(c);
 	}
 
+	// 取得方法返回的类型
 	private Class<?> getMethodT(MvcStringDataConver<?> convert) {
 		for (Method m : convert.getClass().getDeclaredMethods()) {
 			if (m.getName().equals("toT")) {
@@ -59,26 +72,5 @@ public class ConvertCenter {
 			}
 		}
 		return null;
-	}
-
-	public static void main(String args[]) {
-		new ConvertCenter().regConverCenter(new My()).regConverCenter(new MyInt());
-		System.out.println(convertDo.get(int.class).toT("aaaaaaaa"));
-	}
-}
-
-class MyInt implements MvcStringDataConver<Integer> {
-
-	@Override
-	public Integer toT(String webValue) {
-		return 1;
-	}
-}
-
-class My implements MvcStringDataConver<String> {
-
-	@Override
-	public String toT(String webValue) {
-		return webValue;
 	}
 }

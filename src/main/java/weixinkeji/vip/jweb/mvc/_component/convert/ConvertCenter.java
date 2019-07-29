@@ -4,8 +4,30 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.BooleanDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.ByteDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.CharDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.DateDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.DoubleDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.FloatDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.IntegerDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.LongDefault;
+import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.ShortDefault;
+
 public class ConvertCenter {
 	private final static Map<Class<?>, MvcStringDataConver<?>> convertDo = new HashMap<>();
+	static {
+		ConvertCenter cc = new ConvertCenter();
+		cc.regConverCenter(new BooleanDefault());
+		cc.regConverCenter(new ByteDefault());
+		cc.regConverCenter(new CharDefault());
+		cc.regConverCenter(new DateDefault());
+		cc.regConverCenter(new DoubleDefault());
+		cc.regConverCenter(new FloatDefault());
+		cc.regConverCenter(new IntegerDefault());
+		cc.regConverCenter(new LongDefault());
+		cc.regConverCenter(new ShortDefault());
+	}
 
 	public ConvertCenter regConverCenter(MvcStringDataConver<?> obj) {
 		Class<?> c = this.getMethodT(obj);

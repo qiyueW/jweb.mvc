@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.ann.request;
+package weixinkeji.vip.jweb.mvc.ann;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
 @Target(METHOD)
-public @interface JWebPost {
+public @interface JWebGet {
 
 }

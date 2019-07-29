@@ -5,16 +5,19 @@ import java.util.List;
 
 public abstract class __InitModel {
 	protected List<Class<?>> list;
+
 	/**
-	 *  需要扫描类的集合
+	 * 需要扫描类的集合
+	 * 
 	 * @param list 扫描到的类
 	 */
 	__InitModel() {
 		this.list = new ArrayList<>();
 	}
-	
+
 	/**
-	 *  需要扫描类的集合
+	 * 需要扫描类的集合
+	 * 
 	 * @param list 扫描到的类
 	 */
 	protected __InitModel(List<Class<?>> list) {
@@ -46,4 +49,17 @@ public abstract class __InitModel {
 		}
 		return obj;
 	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> List<Class<T>> findClass_T(Class<T> yourClass) {
+		List<Class<T>> list = new ArrayList<>();
+		for (Class<?> c : list) {
+			// 从集合中，找到实现了T接口的类。
+			if (yourClass.isAssignableFrom(c) && !c.equals(yourClass)) {
+				list.add((Class<T>) c);
+			}
+		}
+		return list;
+	}
+
 }

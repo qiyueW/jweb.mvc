@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConvertCenter {
-	private final static Map<Class<?>, MvcDataConver<?>> convertDo = new HashMap<>();
+	private final static Map<Class<?>, MvcStringDataConver<?>> convertDo = new HashMap<>();
 
-	public ConvertCenter regConverCenter(MvcDataConver<?> obj) {
+	public ConvertCenter regConverCenter(MvcStringDataConver<?> obj) {
 		Class<?> c = this.getMethodT(obj);
 		if (c == Boolean.class) {
 			convertDo.put(boolean.class, obj);
@@ -26,11 +26,11 @@ public class ConvertCenter {
 		return this;
 	}
 
-	public MvcDataConver<?> getMvcDataConver(Class<?> c) {
+	public MvcStringDataConver<?> getMvcDataConver(Class<?> c) {
 		return convertDo.get(c);
 	}
 
-	private Class<?> getMethodT(MvcDataConver<?> convert) {
+	private Class<?> getMethodT(MvcStringDataConver<?> convert) {
 		for (Method m : convert.getClass().getDeclaredMethods()) {
 			if (m.getName().equals("toT")) {
 				return m.getReturnType();
@@ -45,7 +45,7 @@ public class ConvertCenter {
 	}
 }
 
-class MyInt implements MvcDataConver<Integer> {
+class MyInt implements MvcStringDataConver<Integer> {
 
 	@Override
 	public Integer toT(String webValue) {
@@ -53,7 +53,7 @@ class MyInt implements MvcDataConver<Integer> {
 	}
 }
 
-class My implements MvcDataConver<String> {
+class My implements MvcStringDataConver<String> {
 
 	@Override
 	public String toT(String webValue) {

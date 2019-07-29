@@ -1,6 +1,6 @@
 package weixinkeji.vip.jweb.mvc._component.convert;
 
-public interface MvcDataConver<T> {
+public interface MvcStringDataConver<T> {
 
 	/**
 	 * String值，转成<T>类型

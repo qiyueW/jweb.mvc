@@ -1,8 +1,8 @@
 package weixinkeji.vip.jweb.mvc._component.convert.defaultImpl;
 
-import weixinkeji.vip.jweb.mvc._component.convert.MvcDataConver;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringDataConver;
 
-public class IntegerDefault implements MvcDataConver<Integer> {
+public class IntegerDefault implements MvcStringDataConver<Integer> {
 
 	@Override
 	public Integer toT(String webValue) {

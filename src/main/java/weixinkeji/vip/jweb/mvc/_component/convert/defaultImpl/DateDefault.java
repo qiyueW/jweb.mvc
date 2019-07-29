@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import weixinkeji.vip.jweb.mvc._component.convert.MvcDataConver;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringDataConver;
 
-public class DateDefault implements MvcDataConver<Date> {
+public class DateDefault implements MvcStringDataConver<Date> {
 
 	private SimpleDateFormat sf_hg = new SimpleDateFormat("yyyy-MM-dd");
 	private SimpleDateFormat sf_hg_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

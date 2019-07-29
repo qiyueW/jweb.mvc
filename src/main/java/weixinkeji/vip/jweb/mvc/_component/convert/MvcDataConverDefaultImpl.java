@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.convert;
+package weixinkeji.vip.jweb.mvc._component.convert;
 
 public class MvcDataConverDefaultImpl implements MvcDataConver<Object> {
 

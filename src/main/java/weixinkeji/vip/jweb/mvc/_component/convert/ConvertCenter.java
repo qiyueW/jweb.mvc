@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.convert;
+package weixinkeji.vip.jweb.mvc._component.convert;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

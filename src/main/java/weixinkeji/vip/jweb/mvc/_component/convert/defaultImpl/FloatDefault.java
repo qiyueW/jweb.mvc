@@ -1,6 +1,6 @@
-package weixinkeji.vip.jweb.mvc.convert.defaultImpl;
+package weixinkeji.vip.jweb.mvc._component.convert.defaultImpl;
 
-import weixinkeji.vip.jweb.mvc.convert.MvcDataConver;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcDataConver;
 
 public class FloatDefault implements MvcDataConver<Float> {
 

@@ -1,10 +1,10 @@
-package weixinkeji.vip.jweb.mvc.convert.defaultImpl;
+package weixinkeji.vip.jweb.mvc._component.convert.defaultImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import weixinkeji.vip.jweb.mvc.convert.MvcDataConver;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcDataConver;
 
 public class DateDefault implements MvcDataConver<Date> {
 

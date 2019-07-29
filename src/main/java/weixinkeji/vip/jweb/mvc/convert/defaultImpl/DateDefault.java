@@ -9,10 +9,10 @@ import weixinkeji.vip.jweb.mvc.convert.MvcDataConver;
 public class DateDefault implements MvcDataConver<Date> {
 
 	private SimpleDateFormat sf_hg = new SimpleDateFormat("yyyy-MM-dd");
-	private SimpleDateFormat sf_hg_time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	private SimpleDateFormat sf_hg_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat sf_xg = new SimpleDateFormat("yyyy/MM/dd");
-	private SimpleDateFormat sf_xg_time = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-	
+	private SimpleDateFormat sf_xg_time = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
 	@Override
 	public Date toT(String webValue) {
 		if (null == webValue || webValue.isEmpty()) {

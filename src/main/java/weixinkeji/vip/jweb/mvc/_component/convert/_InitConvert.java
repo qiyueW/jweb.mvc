@@ -12,7 +12,7 @@ public class _InitConvert {
 			return;
 		}
 		init = true;
-		ConvertCenter cc = new ConvertCenter();
+		MvcStringConvertModel cc = new MvcStringConvertModel();
 		for (Class<MvcStringDataConver> c : list) {
 			try {
 				cc.regConverCenter(c.getConstructor().newInstance());

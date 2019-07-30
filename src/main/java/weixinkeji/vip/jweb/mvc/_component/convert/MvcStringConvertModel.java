@@ -14,10 +14,10 @@ import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.IntegerDefault;
 import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.LongDefault;
 import weixinkeji.vip.jweb.mvc._component.convert.defaultImpl.ShortDefault;
 
-public class ConvertCenter {
+final public class MvcStringConvertModel {
 	private final static Map<Class<?>, MvcStringDataConver<?>> convertDo = new HashMap<>();
 	static {
-		ConvertCenter cc = new ConvertCenter();
+		MvcStringConvertModel cc = new MvcStringConvertModel();
 		cc.regConverCenter(new BooleanDefault());
 		cc.regConverCenter(new ByteDefault());
 		cc.regConverCenter(new CharDefault());
@@ -29,13 +29,26 @@ public class ConvertCenter {
 		cc.regConverCenter(new ShortDefault());
 	}
 
+	
+	/**
+	 * 取得类型转换处理实例
+	 * 
+	 * @param c 类型（要转成的类型）
+	 * @return MvcStringDataConver处理实例
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> MvcStringDataConver<T> getMvcDataConver(Class<T> c) {
+		return (MvcStringDataConver<T>) convertDo.get(c);
+	}
+	
+	
 	/**
 	 * 注册一个 ConvertCenter
 	 * 
 	 * @param obj ConvertCenter实例
 	 * @return ConvertCenter
 	 */
-	public ConvertCenter regConverCenter(MvcStringDataConver<?> obj) {
+	public MvcStringConvertModel regConverCenter(MvcStringDataConver<?> obj) {
 		Class<?> c = this.getMethodT(obj);
 		if (c == Boolean.class) {
 			convertDo.put(boolean.class, obj);
@@ -52,16 +65,6 @@ public class ConvertCenter {
 		}
 		convertDo.put(c, obj);
 		return this;
-	}
-
-	/**
-	 * 取得类型转换处理实例
-	 * 
-	 * @param c 类型（要转成的类型）
-	 * @return MvcStringDataConver处理实例
-	 */
-	public MvcStringDataConver<?> getMvcDataConver(Class<?> c) {
-		return convertDo.get(c);
 	}
 
 	// 取得方法返回的类型

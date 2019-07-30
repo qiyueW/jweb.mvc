@@ -52,14 +52,14 @@ public abstract class __InitModel {
 
 	@SuppressWarnings("unchecked")
 	protected <T> List<Class<T>> findClass_T(Class<T> yourClass) {
-		List<Class<T>> list = new ArrayList<>();
+		List<Class<T>> rs = new ArrayList<>();
 		for (Class<?> c : list) {
 			// 从集合中，找到实现了T接口的类。
 			if (yourClass.isAssignableFrom(c) && !c.equals(yourClass)) {
-				list.add((Class<T>) c);
+				rs.add((Class<T>) c);
 			}
 		}
-		return list;
+		return rs;
 	}
 
 }

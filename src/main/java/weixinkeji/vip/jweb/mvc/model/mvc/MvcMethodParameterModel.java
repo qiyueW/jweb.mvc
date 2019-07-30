@@ -5,7 +5,10 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
+import weixinkeji.vip.jweb.mvc._component.file.FileModel;
+import weixinkeji.vip.jweb.mvc.ann.JsonIO;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
+import weixinkeji.vip.jweb.mvc.tools.MvcTools;
 
 /**
  * mvc方法 参数模型
@@ -23,9 +26,9 @@ public class MvcMethodParameterModel {
 	 */
 	public enum getParamWebValueWay {
 		/**
-		 * java基本类型
+		 * 基本类型
 		 */
-		javaBaseType,
+		baseType,
 		/**
 		 * 用户vo类型
 		 */
@@ -38,6 +41,20 @@ public class MvcMethodParameterModel {
 		 * 从io流中，转成json格式的类型
 		 */
 		jsonIO
+	}
+
+	private static getParamWebValueWay checkGetParamWebValueWay(Parameter parameter) {
+		Class<?> vtype = parameter.getType();
+		if (MvcTools.isJavaBaseType(vtype)) {// java普通类型
+			return getParamWebValueWay.baseType;
+		}
+		if (vtype == FileModel.class) { // 文件上传类型
+			return getParamWebValueWay.fileModel;
+		}
+		if (null != parameter.getAnnotation(JsonIO.class)) {
+			return getParamWebValueWay.jsonIO;
+		}
+		return getParamWebValueWay.vo;
 	}
 
 	/**
@@ -75,12 +92,16 @@ public class MvcMethodParameterModel {
 		ParamKey paramKey;
 		String requestKey;
 		getParamWebValueWay paramType;
+
 		List<MvcMethodParameterModel> list = new ArrayList<>();
 		for (Parameter p : params) {
+			//servlet技术，从请求中从取值的key
 			paramKey = p.getAnnotation(ParamKey.class);
 			requestKey = null == paramKey || paramKey.value().trim().isEmpty() ? p.getName() : paramKey.value().trim();
-			paramType=null;
-			list.add(new MvcMethodParameterModel(p, requestKey,paramType));
+			
+			//参数的值的类型，所归属的类型
+			paramType = checkGetParamWebValueWay(p);
+			list.add(new MvcMethodParameterModel(p, requestKey, paramType));
 		}
 		if (list.isEmpty())
 			return EMP;

@@ -49,11 +49,11 @@ public class MvcMethodModel {
 	 * 方法
 	 */
 	public Method method;
-
 	/**
 	 * 方法包含的参数模型
 	 */
 	public final MvcMethodParameterModel[] paramMode;
+	private final boolean paramLengthIs0;
 	/**
 	 * 方法返回类型
 	 */
@@ -61,8 +61,9 @@ public class MvcMethodModel {
 
 	public MvcMethodModel(Method method) {
 		this.method = method;
-		this.paramMode = new MvcMethodParameterModel[method.getParameterCount()];
+		this.paramMode = MvcMethodParameterModel.getMvcMethodParameterModel(method);
 		this.returnModel = new MvcMethodReturnModel(method);
+		this.paramLengthIs0 = this.paramMode.length == 0;
 	}
 
 	/**
@@ -72,8 +73,11 @@ public class MvcMethodModel {
 	 * @return Object 返回的应该是框架的路径或直接为null
 	 * @throws Exception 可能发生的错误
 	 */
-	public Object doMethod(Object mvcObj) throws Exception {
-		return method.invoke(mvcObj);
+	public Object doMethod(Object mvcObj, Object... args) throws Exception {
+		if (this.paramLengthIs0) {
+			return method.invoke(mvcObj);
+		}
+		return method.invoke(mvcObj, args);
 	}
 
 }

@@ -38,7 +38,7 @@ public class MvcMethodModel {
 	public static void closeConfig() {
 		urlMapMethod_open = false;
 	}
-
+	
 	// ---------------------------------------------------------------------------
 
 	/**
@@ -58,14 +58,14 @@ public class MvcMethodModel {
 	 * 方法返回类型
 	 */
 	public final MvcMethodReturnModel returnModel;
-
+	
 	public MvcMethodModel(Method method) {
 		this.method = method;
 		this.paramMode = MvcMethodParameterModel.getMvcMethodParameterModel(method);
 		this.returnModel = new MvcMethodReturnModel(method);
 		this.paramLengthIs0 = this.paramMode.length == 0;
 	}
-
+	
 	/**
 	 * 执行方法
 	 * 

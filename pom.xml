@@ -8,6 +8,15 @@
 	<version>1</version>
 	<name>jweb.mvc Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
+	<repositories>
+		<repository>
+			<id>aliyun</id>
+			<name>aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<!--java支持 -->
 		<dependency>
@@ -28,7 +37,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>weixinkeji.vip</groupId>
 			<artifactId>jweb.validate</artifactId>
@@ -39,6 +48,12 @@
 			<artifactId>jweb.power</artifactId>
 			<version>2.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.58</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<!--识别非resources资源目录下的xml配置文件 -->

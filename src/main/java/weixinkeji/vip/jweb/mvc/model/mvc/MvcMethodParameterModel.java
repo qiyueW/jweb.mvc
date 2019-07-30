@@ -1,10 +1,15 @@
 package weixinkeji.vip.jweb.mvc.model.mvc;
 
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import com.alibaba.fastjson.JSON;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringConvertModel;
 import weixinkeji.vip.jweb.mvc._component.file.FileModel;
 import weixinkeji.vip.jweb.mvc.ann.JsonIO;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
@@ -79,6 +84,32 @@ public class MvcMethodParameterModel {
 		this.paramType = paramType;
 	}
 
+	public Object getValue(HttpServletRequest req) throws Exception {
+		String value;
+		switch (this.paramType) {
+		case baseType: {
+			value = req.getParameter(requestKey);
+			return null == value ? null : MvcStringConvertModel.getMvcDataConver(this.parameterVoClassType).toT(value);
+		}
+		case jsonIO: {
+			byte[] b = new byte[512];
+			int len = 0;
+			InputStream in = req.getInputStream();
+			while ((len = in.read(b, len, b.length)) != -1) {
+				if (len == b.length) {
+					b = Arrays.copyOf(b, len + 50);
+				}
+			}
+			// 把字节，转成json
+			return JSON.parseObject(b, this.parameterVoClassType);
+		}
+		default: {
+			return null;
+		}
+		}
+
+	}
+
 	private static MvcMethodParameterModel[] EMP = new MvcMethodParameterModel[] {};
 
 	/**
@@ -95,11 +126,11 @@ public class MvcMethodParameterModel {
 
 		List<MvcMethodParameterModel> list = new ArrayList<>();
 		for (Parameter p : params) {
-			//servlet技术，从请求中从取值的key
+			// servlet技术，从请求中从取值的key
 			paramKey = p.getAnnotation(ParamKey.class);
 			requestKey = null == paramKey || paramKey.value().trim().isEmpty() ? p.getName() : paramKey.value().trim();
-			
-			//参数的值的类型，所归属的类型
+
+			// 参数的值的类型，所归属的类型
 			paramType = checkGetParamWebValueWay(p);
 			list.add(new MvcMethodParameterModel(p, requestKey, paramType));
 		}

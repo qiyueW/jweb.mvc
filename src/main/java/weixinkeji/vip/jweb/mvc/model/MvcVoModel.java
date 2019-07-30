@@ -1,7 +1,6 @@
 package weixinkeji.vip.jweb.mvc.model;
 
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 

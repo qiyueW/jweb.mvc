@@ -23,7 +23,6 @@ public class ConvertCenterTest {
 	public void testGetMvcDataConver() {
 		MvcStringDataConver<?> c = MvcStringConvertModel.getMvcDataConver(int.class);
 		System.out.println(c.toT("1"));
-
 	}
 
 }

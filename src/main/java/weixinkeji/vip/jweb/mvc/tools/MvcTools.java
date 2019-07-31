@@ -21,8 +21,27 @@ public class MvcTools {
 		;
 	}
 
+	/**
+	 * 把驼峰，转成_连接
+	 * 
+	 * @param str String
+	 * @return String 转换后的字符串
+	 */
+	public static String strTransform_(String str) {
+		char[] cs = str.toCharArray();
+		StringBuilder sb = new StringBuilder();
+		for (char c : cs) {
+			if (c >= 'A' && c <= 'Z') {
+				sb.append('_').append(Character.toLowerCase(c));
+			} else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+
 	public static void main(String args[]) {
-		Class<?> c = Byte.class;
-		System.out.println(Byte.class.getName() + "//" + (c == Byte[].class));
+		String str = "myName";
+		System.out.println(strTransform_(str));
 	}
 }

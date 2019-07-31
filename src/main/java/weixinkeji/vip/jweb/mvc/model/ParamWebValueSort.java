@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.model.mvc;
+package weixinkeji.vip.jweb.mvc.model;
 
 /**
  * 参数分类

@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.model.mvc;
+package weixinkeji.vip.jweb.mvc.model;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;

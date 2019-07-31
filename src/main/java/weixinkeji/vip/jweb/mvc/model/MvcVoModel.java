@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.model.mvc;
+package weixinkeji.vip.jweb.mvc.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

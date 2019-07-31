@@ -11,7 +11,7 @@ import weixinkeji.vip.jweb.mvc.ann.JWebReturnType;
  * @author wangchunzi
  *
  */
-public class MvcMethodReturnModel {
+public final class MvcMethodReturnModel {
 	/**
 	 * 方法返回 类型
 	 */

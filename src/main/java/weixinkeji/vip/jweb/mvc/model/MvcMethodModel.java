@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MvcMethodModel {
+public final class MvcMethodModel {
 	// 存放 url映射Method 的集合
 	private static final Map<String, MvcMethodModel> urlMapMethod = new HashMap<>();
 	// urlMapMethod的开关-

@@ -29,7 +29,7 @@ import weixinkeji.vip.jweb.mvc.tools.MvcTools;
  * @author wangchunzi
  *
  */
-public class MvcMethodParameterModel {
+public final class MvcMethodParameterModel {
 
 	private static ParamWebValueSort checkGetParamWebValueWay(Parameter parameter) {
 		Class<?> vtype = parameter.getType();

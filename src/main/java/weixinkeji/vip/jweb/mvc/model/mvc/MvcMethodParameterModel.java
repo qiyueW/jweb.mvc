@@ -160,7 +160,8 @@ public class MvcMethodParameterModel {
 			return new FileModel(req, parameter);
 		}
 		default: {
-			return null;
+			value = req.getParameter(requestKey);
+			return null == value ? null : MvcStringConvertModel.getMvcDataConver(this.parameterVoClassType).toT(value);
 		}
 		}
 

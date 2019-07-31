@@ -19,7 +19,6 @@ public class _1_InitConvert extends __InitModel {
 	/**
 	 * 初始化配置
 	 * 
-	 * @param sysValidationLib 正则表达式数据中心
 	 */
 	private void initConfig() {
 		_InitConvert.init(super.findClass_T(MvcStringDataConver.class));

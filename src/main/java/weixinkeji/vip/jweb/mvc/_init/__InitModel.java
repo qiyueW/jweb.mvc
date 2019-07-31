@@ -31,7 +31,7 @@ abstract class __InitModel {
 	 * 
 	 * @param yourClass 你要找的类型
 	 * @param obj       用户指定的实例
-	 * @return T
+	 * @return T <T>
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T findObject(Class<T> yourClass, T obj) {
@@ -50,13 +50,12 @@ abstract class __InitModel {
 		return obj;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected <T> List<Class<T>> findClass_T(Class<T> yourClass) {
-		List<Class<T>> rs = new ArrayList<>();
+	protected List<Class<?>> findClass_T(Class<?> yourClass) {
+		List<Class<?>> rs = new ArrayList<>();
 		for (Class<?> c : list) {
 			// 从集合中，找到实现了T接口的类。
 			if (yourClass.isAssignableFrom(c) && !c.equals(yourClass)) {
-				rs.add((Class<T>) c);
+				rs.add(c);
 			}
 		}
 		return rs;

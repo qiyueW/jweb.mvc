@@ -21,7 +21,6 @@ public class _0_InitMvcConfig extends __InitModel {
 	/**
 	 * 初始化配置
 	 * 
-	 * @param sysValidationLib 正则表达式数据中心
 	 */
 	private void initConfig() {
 		ConfigVoTemp tempVo = new ConfigVoTemp();// 配置载体

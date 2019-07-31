@@ -8,9 +8,10 @@ public interface MvcMethodParameterModelConfig<T> {
 	/**
 	 * 此类的实例方法
 	 * 
-	 * @param request
-	 * @param response
-	 * @return
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return T
 	 */
 	T getObject(HttpServletRequest request, HttpServletResponse response);
+
 }

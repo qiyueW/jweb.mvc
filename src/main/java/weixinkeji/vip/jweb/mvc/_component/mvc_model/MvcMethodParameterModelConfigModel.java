@@ -29,18 +29,11 @@ public class MvcMethodParameterModelConfigModel {
 	}
 
 	/**
-	 * @param c        类型
-	 * @param request  HttpServletRequest
-	 * @param response HttpServletResponse
-	 * @return Object
+	 * @param c 类型
+	 * @return MvcMethodParameterModelConfig
 	 */
-	public static Object getMvcMethodParameterModelConfig(Class<?> c, HttpServletRequest request,
-			HttpServletResponse response) {
-		MvcMethodParameterModelConfig<?> config = configModel.get(c);
-		if (null == config) {
-			return null;
-		}
-		return config.getObject(request, response);
+	public static MvcMethodParameterModelConfig<?> getMvcMethodParameterModelConfig(Class<?> c) {
+		return configModel.get(c);
 	}
 
 	// 取得方法返回的类型

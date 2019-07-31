@@ -3,7 +3,7 @@ package weixinkeji.vip.jweb.mvc._init;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class __InitModel {
+abstract class __InitModel {
 	protected List<Class<?>> list;
 
 	/**

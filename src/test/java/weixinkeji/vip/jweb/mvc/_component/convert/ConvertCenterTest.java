@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import weixinkeji.vip.jweb.mvc._init._0_InitConvert;
+import weixinkeji.vip.jweb.mvc._init._1_InitConvert;
 
 public class ConvertCenterTest {
 
@@ -16,7 +16,7 @@ public class ConvertCenterTest {
 		list.add(HH.class);
 
 		// 初始化
-		new _0_InitConvert(list);
+		new _1_InitConvert(list);
 	}
 
 	@Test

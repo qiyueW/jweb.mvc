@@ -26,6 +26,8 @@ public class MvcMethodParameterModelConfigModel {
 	}
 
 	/**
+	 * 取得 MvcMethodParameterModelConfig
+	 * 
 	 * @param c 类型
 	 * @return MvcMethodParameterModelConfig
 	 */

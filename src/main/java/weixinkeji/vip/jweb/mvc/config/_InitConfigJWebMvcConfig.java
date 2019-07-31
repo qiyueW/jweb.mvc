@@ -9,7 +9,7 @@ package weixinkeji.vip.jweb.mvc.config;
 public class _InitConfigJWebMvcConfig {
 
 	/**
-	 * 初始化入口
+	 * 初始化入口 {@link weixinkeji.vip.jweb.mvc._init._0_InitMvcConfig}
 	 * 
 	 * @param vo ConfigVoTemp 用户配置载体
 	 */

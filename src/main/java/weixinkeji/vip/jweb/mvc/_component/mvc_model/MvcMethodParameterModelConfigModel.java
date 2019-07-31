@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.model.config;
+package weixinkeji.vip.jweb.mvc._component.mvc_model;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

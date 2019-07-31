@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.model.config;
+package weixinkeji.vip.jweb.mvc._component.mvc_model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

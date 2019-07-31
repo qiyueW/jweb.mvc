@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringConvertModel;
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringDataConver;
 import weixinkeji.vip.jweb.mvc.config.JWebConfigModel;
 import weixinkeji.vip.jweb.mvc.tools.MvcTools;
 
@@ -35,13 +37,18 @@ public class MvcVoModel {
 
 	// 生产 MvcVoModel[]
 	private static MvcVoModel[] getModels(Class<?> c) {
+		JWebConfigModel config = JWebConfigModel.getJWebConfigModel();
 		Field[] fs = c.getDeclaredFields();
 		MvcVoModel[] models = new MvcVoModel[fs.length];
-		JWebConfigModel config = JWebConfigModel.getJWebConfigModel();
 		String requestKey;
 		for (int i = 0; i < fs.length; i++) {
+			fs[i].setAccessible(true);
 			requestKey = config.webValue_autoTransform_vo ? MvcTools.strTransform_(fs[i].getName()) : fs[i].getName();
-			models[i] = new MvcVoModel(fs[i], requestKey, "");//
+			try {
+				models[i] = new MvcVoModel(fs[i], requestKey, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}//
 		}
 		return models;
 	}
@@ -58,11 +65,27 @@ public class MvcVoModel {
 	 * 时间格式-当Field类型是Date时，才生效
 	 */
 	public final String dateFormat;
+	private final MvcStringDataConver<?> model;
 
-	private MvcVoModel(Field f, String requestKey, String dateFormat) {
+	private MvcVoModel(Field f, String requestKey, String dateFormat) throws Exception {
 		this.f = f;
 		this.requestKey = requestKey;
 		this.dateFormat = dateFormat;
+		model = MvcStringConvertModel.getMvcDataConver(f.getType());
+		if (null == model) {
+			throw new Exception("未知类型,请注册 String类型对" + f.getType() + "类型的转换处理");
+		}
+	}
+
+	/**
+	 * 设置值
+	 * 
+	 * @param vo    对象
+	 * @param value 属性值
+	 * @throws Exception 异常信息
+	 */
+	public void setValue(Object vo, Object value) throws Exception {
+		f.set(vo, model.toT(value.toString()));
 	}
 
 }

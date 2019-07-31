@@ -38,21 +38,21 @@ public class MvcMethodParameterModel {
 		 */
 		baseType,
 		/**
-		 * 用户vo类型
-		 */
-		vo,
-		/**
 		 * 文件模型 ，当参数是 {@link weixinkeji.vip.jweb.mvc._component.file.FileModel} 时
 		 */
 		fileModel,
 		/**
-		 * 从io流中，转成json格式的类型
+		 * io流->json格式-> vo的类型
 		 */
 		jsonIO,
 		/**
-		 * 键值对。但值是json格式的数据
+		 * 键值对->json格式-> vo的类型
 		 */
-		JsonKV
+		JsonKV,
+		/**
+		 * vo类型
+		 */
+		vo
 	}
 
 	private static getParamWebValueWay checkGetParamWebValueWay(Parameter parameter) {
@@ -126,7 +126,7 @@ public class MvcMethodParameterModel {
 			value = req.getParameter(requestKey);
 			// 当value不为null时，
 			if (null == value) {
-				 
+
 			}
 		}
 		default: {

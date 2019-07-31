@@ -28,6 +28,5 @@ public class _0_InitMvcConfig extends __InitModel {
 		JWebMVCConfig config = super.findObject(JWebMVCConfig.class, new JWebMVCConfigDefaultImpl());// 找配置。找不到则采用默认的实现类
 		config.setJWebMvcConfig(tempVo);// 加载用户配置
 		new _InitConfigJWebMvcConfig().init(tempVo);// 初始化配置（把用户配置，装到系统配置vo）
-
 	}
 }

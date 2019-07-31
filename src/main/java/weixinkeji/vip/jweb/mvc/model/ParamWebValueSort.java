@@ -55,9 +55,15 @@ public enum ParamWebValueSort {
 	 * 键值对->json格式-> vo的类型
 	 */
 	JsonKV,
+//用户自定义 1	
+	/**
+	 * 用户自己注册的vo
+	 */
+	userVo,
 //默认是用户的vo类型 1
 	/**
 	 * vo类型
 	 */
 	vo
+
 }

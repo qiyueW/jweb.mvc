@@ -18,6 +18,8 @@ import com.alibaba.fastjson.JSON;
 import weixinkeji.vip.jweb.mvc.JWebMvc;
 import weixinkeji.vip.jweb.mvc._component.convert.MvcStringConvertModel;
 import weixinkeji.vip.jweb.mvc._component.file.FileModel;
+import weixinkeji.vip.jweb.mvc._component.mvc_model.MvcMethodParameterModelConfig;
+import weixinkeji.vip.jweb.mvc._component.mvc_model.MvcMethodParameterModelConfigModel;
 import weixinkeji.vip.jweb.mvc.ann.JsonIO;
 import weixinkeji.vip.jweb.mvc.ann.JsonKV;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
@@ -63,6 +65,10 @@ public final class MvcMethodParameterModel {
 		}
 		if (null != parameter.getAnnotation(JsonKV.class)) {
 			return ParamWebValueSort.JsonKV;
+		}
+//用户自定义		
+		if (null != MvcMethodParameterModelConfigModel.getMvcMethodParameterModelConfig(vtype)) {
+			return ParamWebValueSort.userVo;
 		}
 //默认是用户的vo类型
 		return ParamWebValueSort.vo;
@@ -185,6 +191,12 @@ public final class MvcMethodParameterModel {
 			}
 			// 当作json方式处理
 			return JSON.parseObject(value, this.parameterVoClassType);
+		}
+//用户自定义注册的类型		
+		case userVo: {
+			MvcMethodParameterModelConfig<?> obj = MvcMethodParameterModelConfigModel
+					.getMvcMethodParameterModelConfig(this.parameterVoClassType);
+			return null == obj ? null : obj.getObject(req, response);
 		}
 //未知类型		
 		default: {

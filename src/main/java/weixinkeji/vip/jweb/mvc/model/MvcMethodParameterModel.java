@@ -110,8 +110,9 @@ public final class MvcMethodParameterModel {
 	 * 从web请求中，取得参数值
 	 * 
 	 * @param req HttpServletRequest请求
+	 * @param response HttpServletResponse响应
 	 * @return Object 参数值
-	 * @throws Exception
+	 * @throws Exception 可能发生的异常
 	 */
 	public Object getValue(final HttpServletRequest req, final HttpServletResponse response) throws Exception {
 		String value;

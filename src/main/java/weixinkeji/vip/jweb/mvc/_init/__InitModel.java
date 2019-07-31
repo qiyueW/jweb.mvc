@@ -31,7 +31,7 @@ abstract class __InitModel {
 	 * 
 	 * @param yourClass 你要找的类型
 	 * @param obj       用户指定的实例
-	 * @return T <T>
+	 * @return T 泛型
 	 */
 	@SuppressWarnings("unchecked")
 	protected <T> T findObject(Class<T> yourClass, T obj) {

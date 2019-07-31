@@ -38,7 +38,7 @@ public final class MvcMethodModel {
 	public static void closeConfig() {
 		urlMapMethod_open = false;
 	}
-	
+
 	// ---------------------------------------------------------------------------
 
 	/**
@@ -58,18 +58,19 @@ public final class MvcMethodModel {
 	 * 方法返回类型
 	 */
 	public final MvcMethodReturnModel returnModel;
-	
+
 	public MvcMethodModel(Method method) {
 		this.method = method;
 		this.paramMode = MvcMethodParameterModel.getMvcMethodParameterModel(method);
 		this.returnModel = new MvcMethodReturnModel(method);
 		this.paramLengthIs0 = this.paramMode.length == 0;
 	}
-	
+
 	/**
-	 * 执行方法
+	 * vo对象执行方法
 	 * 
-	 * @param mvcObj 对象
+	 * @param mvcObj vo对象
+	 * @param args   参数值
 	 * @return Object 返回的应该是框架的路径或直接为null
 	 * @throws Exception 可能发生的错误
 	 */

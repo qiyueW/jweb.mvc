@@ -48,11 +48,11 @@ public enum ParamWebValueSort {
 	HttpSession,
 //注解后 2
 	/**
-	 * io流->json格式-> vo的类型
+	 * io流-json格式-vo的类型
 	 */
 	jsonIO,
 	/**
-	 * 键值对->json格式-> vo的类型
+	 * 键值对-json格式-vo的类型
 	 */
 	JsonKV,
 //用户自定义 1	

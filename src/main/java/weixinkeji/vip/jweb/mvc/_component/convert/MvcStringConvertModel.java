@@ -29,19 +29,16 @@ final public class MvcStringConvertModel {
 		cc.regConverCenter(new ShortDefault());
 	}
 
-	
 	/**
 	 * 取得类型转换处理实例
 	 * 
 	 * @param c 类型（要转成的类型）
-	 * @return MvcStringDataConver处理实例
+	 * @return MvcStringDataConver 处理实例
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> MvcStringDataConver<T> getMvcDataConver(Class<T> c) {
-		return (MvcStringDataConver<T>) convertDo.get(c);
+	public static MvcStringDataConver<?> getMvcDataConver(Class<?> c) {
+		return convertDo.get(c);
 	}
-	
-	
+
 	/**
 	 * 注册一个 ConvertCenter
 	 * 

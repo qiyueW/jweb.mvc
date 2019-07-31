@@ -13,14 +13,14 @@ public @interface JWebReturnType {
 	/**
 	 * value="c" 表示控制类
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String value() default "";
 
 	/**
 	 * 与 value同义词
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String type() default "";
 

@@ -7,7 +7,50 @@
 	<packaging>war</packaging>
 	<version>1</version>
 	<name>jweb.mvc Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<description>
+  	jweb.mvc框架，是一款基于java Servlet技术上的封装框架。	它简单易用却又强健！
+  	</description>
+	<url>https://github.com/weixinkeji/jweb.mvc</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>wangchunzi</name>
+			<email>pankeng1988w@aliyun.com</email>
+			<organization>wangchunzi</organization>
+			<url>https://github.com/weixinkeji/jweb.mvc</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:https://github.com/weixinkeji/jweb.mvc.git</connection>
+		<developerConnection>scm:git:https://github.com/weixinkeji/jweb.mvc.git</developerConnection>
+		<url>https://github.com/weixinkeji/jweb.mvc</url>
+		<tag>v${project.version}</tag>
+	</scm>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<name>Maven Central Staging Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<repositories>
 		<repository>
@@ -16,7 +59,7 @@
 			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<!--java支持 -->
 		<dependency>
@@ -38,11 +81,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>weixinkeji.vip</groupId>
-			<artifactId>jweb.validate</artifactId>
-			<version>1</version>
-		</dependency>
+		<!-- <dependency> <groupId>weixinkeji.vip</groupId> <artifactId>jweb.validate</artifactId> 
+			<version>1</version> </dependency> -->
 		<dependency>
 			<groupId>weixinkeji.vip</groupId>
 			<artifactId>jweb.power</artifactId>
@@ -96,6 +136,46 @@
 					<target>1.8</target>
 					<encoding>utf8</encoding>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<finalName>jweb.mvc</finalName>

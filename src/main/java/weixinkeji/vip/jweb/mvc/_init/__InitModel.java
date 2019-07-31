@@ -29,6 +29,7 @@ abstract class __InitModel {
 	 * <p>
 	 * 找不到，则返回用户指定的实例。
 	 * 
+	 * @param <T>  泛型
 	 * @param yourClass 你要找的类型
 	 * @param obj       用户指定的实例
 	 * @return T 泛型

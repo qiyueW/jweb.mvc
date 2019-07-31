@@ -94,6 +94,11 @@
 			<version>1.2.58</version>
 		</dependency>
 
+		<dependency>
+			<groupId>weixinkeji.vip</groupId>
+			<artifactId>jweb.validate</artifactId>
+			<version>1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<!--识别非resources资源目录下的xml配置文件 -->

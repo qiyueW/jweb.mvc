@@ -86,14 +86,27 @@ public class MvcMethodParameterModel {
 	public final String requestKey;
 
 	public final getParamWebValueWay paramType;
+	private final MvcVoModel voModel[];// 当类型是vo时，专属vo字段处理的模型
 
 	private MvcMethodParameterModel(Parameter parameter, String requestKey, getParamWebValueWay paramType) {
 		this.parameter = parameter;
 		this.parameterVoClassType = parameter.getType();
 		this.requestKey = requestKey;
 		this.paramType = paramType;
+		if (this.paramType == getParamWebValueWay.vo || this.paramType == getParamWebValueWay.JsonKV) {
+			voModel = MvcVoModel.getMvcVoModel(parameterVoClassType);
+		} else {
+			voModel = null;
+		}
 	}
 
+	/**
+	 * 从web请求中，取得参数值
+	 * 
+	 * @param req HttpServletRequest请求
+	 * @return Object 参数值
+	 * @throws Exception
+	 */
 	public Object getValue(HttpServletRequest req) throws Exception {
 		String value;
 		switch (this.paramType) {
@@ -124,10 +137,27 @@ public class MvcMethodParameterModel {
 		}
 		case vo: {
 			value = req.getParameter(requestKey);
-			// 当value不为null时，
-			if (null == value) {
-
+			// 指定值是JSON结果时，强制json方式处理
+			if (this.paramType == getParamWebValueWay.JsonKV) {
+				return null == value ? null : JSON.parseObject(value, this.parameterVoClassType);
 			}
+			// 当value不为null时，
+			if (null == value) {// 当为null时，使用vo属性key，去取参数。如果一个参数都取不到，直接返回null
+				Object voObject = MvcVoModel.getObject(parameterVoClassType);// 实例一个对象
+				boolean hasValue = false;
+				for (MvcVoModel vm : voModel) {
+					if (null != (value = req.getParameter(vm.requestKey))) {
+						hasValue = true;
+						vm.setValue(voObject, value);// 装箱-设置vo对象属性值
+					}
+				}
+				return hasValue ? voObject : null;// 如果找不到一项对应的属性，则直接返回null
+			}
+			// 当作json方式处理
+			return JSON.parseObject(value, this.parameterVoClassType);
+		}
+		case fileModel: {
+			return new FileModel(req, parameter);
 		}
 		default: {
 			return null;
@@ -154,8 +184,8 @@ public class MvcMethodParameterModel {
 		for (Parameter p : params) {
 			// servlet技术，从请求中从取值的key
 			paramKey = p.getAnnotation(ParamKey.class);
+			// web取值的key
 			requestKey = null == paramKey || paramKey.value().trim().isEmpty() ? p.getName() : paramKey.value().trim();
-
 			// 参数的值的类型，所归属的类型
 			paramType = checkGetParamWebValueWay(p);
 			list.add(new MvcMethodParameterModel(p, requestKey, paramType));

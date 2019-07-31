@@ -1,6 +1,7 @@
 package weixinkeji.vip.jweb.mvc.model.mvc;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,10 +16,26 @@ import weixinkeji.vip.jweb.mvc.tools.MvcTools;
  * @author wangchunzi
  *
  */
-public class MvcVoModel {
+public final class MvcVoModel {
 
 	// voModel集合
 	private static final Map<Class<?>, MvcVoModel[]> voModel = new HashMap<>();
+
+	/**
+	 * 实例一个对象
+	 * 
+	 * @param c 类
+	 * @return Object
+	 */
+	public static Object getObject(Class<?> c) {
+		try {
+			return c.getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * 得取MvcVo模型
@@ -48,7 +65,7 @@ public class MvcVoModel {
 				models[i] = new MvcVoModel(fs[i], requestKey, "");
 			} catch (Exception e) {
 				e.printStackTrace();
-			}//
+			} //
 		}
 		return models;
 	}

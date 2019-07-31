@@ -10,7 +10,7 @@ public class JWebMvc {
 	
 	public JWebMvc(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
-		this.response = response;
+		this.response =response;
 	}
 	
 	/**

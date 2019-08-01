@@ -130,10 +130,10 @@ public final class MvcMethodParameterModel {
 		}
 //框架封装 3		
 		case fileModel: {
-			return new FileModel(req, parameter);
+			return new FileModel(this.parameter, req, response);
 		}
 		case fileModel_N: {
-			return new FileModel(req, parameter);
+			return new FileModel(this.parameter, req, response);
 		}
 		case JWebMvc: {
 			return new JWebMvc(req, response);

@@ -35,6 +35,10 @@ public final class MvcMethodParameterModel {
 
 	private static ParamWebValueSort checkGetParamWebValueWay(Parameter parameter) {
 		Class<?> vtype = parameter.getType();
+// 用户自定义
+		if (null != MvcMethodParameterModelConfigModel.getMvcMethodParameterModelConfig(vtype)) {
+			return ParamWebValueSort.userVo;
+		}
 //基本类型		
 		if (MvcTools.isJavaBaseType(vtype)) {// java普通类型
 			return ParamWebValueSort.baseType;
@@ -65,10 +69,6 @@ public final class MvcMethodParameterModel {
 		}
 		if (null != parameter.getAnnotation(JsonKV.class)) {
 			return ParamWebValueSort.JsonKV;
-		}
-//用户自定义		
-		if (null != MvcMethodParameterModelConfigModel.getMvcMethodParameterModelConfig(vtype)) {
-			return ParamWebValueSort.userVo;
 		}
 //默认是用户的vo类型
 		return ParamWebValueSort.vo;
@@ -109,7 +109,7 @@ public final class MvcMethodParameterModel {
 	/**
 	 * 从web请求中，取得参数值
 	 * 
-	 * @param req HttpServletRequest请求
+	 * @param req      HttpServletRequest请求
 	 * @param response HttpServletResponse响应
 	 * @return Object 参数值
 	 * @throws Exception 可能发生的异常
@@ -117,6 +117,12 @@ public final class MvcMethodParameterModel {
 	public Object getValue(final HttpServletRequest req, final HttpServletResponse response) throws Exception {
 		String value;
 		switch (this.paramType) {
+//用户自定义注册的类型
+		case userVo: {
+			MvcMethodParameterModelConfig<?> obj = MvcMethodParameterModelConfigModel
+					.getMvcMethodParameterModelConfig(this.parameterVoClassType);
+			return null == obj ? null : obj.getObject(this.parameter, req, response);
+		}
 //基本类型 1			
 		case baseType: {
 			value = req.getParameter(requestKey);
@@ -192,12 +198,6 @@ public final class MvcMethodParameterModel {
 			}
 			// 当作json方式处理
 			return JSON.parseObject(value, this.parameterVoClassType);
-		}
-//用户自定义注册的类型		
-		case userVo: {
-			MvcMethodParameterModelConfig<?> obj = MvcMethodParameterModelConfigModel
-					.getMvcMethodParameterModelConfig(this.parameterVoClassType);
-			return null == obj ? null : obj.getObject(req, response);
 		}
 //未知类型		
 		default: {

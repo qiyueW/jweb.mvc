@@ -1,5 +1,7 @@
 package weixinkeji.vip.jweb.mvc.tools;
 
+import java.util.Date;
+
 public class MvcTools {
 
 	/**
@@ -17,8 +19,7 @@ public class MvcTools {
 				|| c == long.class || c == Long.class // long
 				|| c == float.class || c == Float.class // float
 				|| c == double.class || c == Double.class // double
-
-		;
+				|| c == Date.class || c == java.sql.Date.class;
 	}
 
 	/**

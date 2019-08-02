@@ -22,5 +22,9 @@ public class ConfigVoTemp {
 	 * 使用jweb.validate权限框架
 	 */
 	public boolean jweb_validate = true;
-
+	/**
+	 * 检验失败后，是否立马中止检验。<br>
+	 * 推荐是(true)。
+	 */
+	public boolean errorReturn=true;
 }

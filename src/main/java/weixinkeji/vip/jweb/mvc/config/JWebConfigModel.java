@@ -22,11 +22,18 @@ public final class JWebConfigModel {
 	 * 使用jweb.validate权限框架
 	 */
 	public final boolean jweb_validate;
-
+	
+	/**
+	 * 检验失败后，是否立马中止检验。<br>
+	 * 推荐是。
+	 */
+	public final boolean errorReturn;
+	
 	private JWebConfigModel(ConfigVoTemp vo) {
 		this.webValue_autoTransform = vo.webValue_autoTransform;
 		this.webValue_autoTransform_vo = vo.webValue_autoTransform_vo;
 		this.jweb_validate = vo.jweb_validate;
+		this.errorReturn=vo.errorReturn;
 	}
 
 	private static JWebConfigModel config;

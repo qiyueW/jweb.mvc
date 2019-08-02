@@ -23,8 +23,10 @@ import weixinkeji.vip.jweb.mvc._component.mvc_model.MvcMethodParameterModelConfi
 import weixinkeji.vip.jweb.mvc.ann.JsonIO;
 import weixinkeji.vip.jweb.mvc.ann.JsonKV;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
+import weixinkeji.vip.jweb.mvc.config.JWebConfigModel;
 import weixinkeji.vip.jweb.mvc.tools.MvcTools;
-import weixinkeji.vip.jweb.validate.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.validate.ValidateResult;
+import weixinkeji.vip.jweb.validate.model.BaseTypeValidateModel;
 import weixinkeji.vip.jweb.validate.model.VoValidateModel;
 
 /**
@@ -95,8 +97,14 @@ public final class MvcMethodParameterModel {
 	 */
 	public final ParamWebValueSort paramType;
 	private final MvcVoModel voModel[];// 当类型是vo时，专属vo字段处理的模型
-	private final JWebMVCValidateVo baseValidate;
-	private final VoValidateModel voValidate;
+
+	// 校验二巨头（二选一）
+	private final BaseTypeValidateModel baseValidate;// 巨头一：基本类型 关联的校验模型
+	private final VoValidateModel voValidate;// 巨头二：vo类型的校验模型
+	private final boolean isVoCheck;// 是否是vo类型的校验
+
+	// 全局配置模型
+	private final JWebConfigModel config = JWebConfigModel.getJWebConfigModel();
 
 	private MvcMethodParameterModel(Parameter parameter, String requestKey, ParamWebValueSort paramType) {
 		this.parameter = parameter;
@@ -111,11 +119,22 @@ public final class MvcMethodParameterModel {
 		if (this.paramType != ParamWebValueSort.baseType) {
 			this.voValidate = VoValidateModel.getVoValidateModel(parameter);
 			this.baseValidate = null;
-		}else {
+		} else {
 			this.voValidate = null;
-			this.baseValidate = null;
+			this.baseValidate = BaseTypeValidateModel.getVoValidateModel(parameter);
 		}
+		isVoCheck = null != this.voValidate;
+	}
 
+	/**
+	 * 校验参数<br>
+	 * 校验成功时，返回的是null
+	 * 
+	 * @param obj 被校验的值
+	 * @return ValidateResult
+	 */
+	public ValidateResult check(Object obj) {
+		return this.isVoCheck ? this.voValidate.check(obj, config.errorReturn) : this.baseValidate.chec(obj);
 	}
 
 	/**

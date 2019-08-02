@@ -25,6 +25,7 @@ import weixinkeji.vip.jweb.mvc.ann.JsonKV;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
 import weixinkeji.vip.jweb.mvc.tools.MvcTools;
 import weixinkeji.vip.jweb.validate.JWebMVCValidateVo;
+import weixinkeji.vip.jweb.validate.model.VoValidateModel;
 
 /**
  * mvc方法 参数模型
@@ -94,8 +95,9 @@ public final class MvcMethodParameterModel {
 	 */
 	public final ParamWebValueSort paramType;
 	private final MvcVoModel voModel[];// 当类型是vo时，专属vo字段处理的模型
-	private final JWebMVCValidateVo validate=null;
-	
+	private final JWebMVCValidateVo baseValidate;
+	private final VoValidateModel voValidate;
+
 	private MvcMethodParameterModel(Parameter parameter, String requestKey, ParamWebValueSort paramType) {
 		this.parameter = parameter;
 		this.parameterVoClassType = parameter.getType();
@@ -106,6 +108,14 @@ public final class MvcMethodParameterModel {
 		} else {
 			voModel = null;
 		}
+		if (this.paramType != ParamWebValueSort.baseType) {
+			this.voValidate = VoValidateModel.getVoValidateModel(parameter);
+			this.baseValidate = null;
+		}else {
+			this.voValidate = null;
+			this.baseValidate = null;
+		}
+
 	}
 
 	/**

@@ -2,8 +2,8 @@ package weixinkeji.vip.jweb.mvc._init;
 
 import java.util.List;
 
-import weixinkeji.vip.jweb.mvc._component.mvc_model.MvcMethodParameterModelConfig;
-import weixinkeji.vip.jweb.mvc._component.mvc_model._InitMethodParameterModelConfig;
+import weixinkeji.vip.jweb.mvc._component.mvc_mp_model.MvcMethodParameterModelConfig;
+import weixinkeji.vip.jweb.mvc._component.mvc_mp_model._InitMethodParameterModelConfig;
 
 public class _1_InitMvcMethodParameterConfigModel extends __InitModel {
 	/**

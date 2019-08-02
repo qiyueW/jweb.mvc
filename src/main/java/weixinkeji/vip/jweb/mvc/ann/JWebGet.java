@@ -10,4 +10,6 @@ import java.lang.annotation.Target;
 @Target(METHOD)
 public @interface JWebGet {
 
+	public String value() default "";
+	public String url() default "";
 }

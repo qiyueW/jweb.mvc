@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target(METHOD)
 public @interface JWebPut {
-
+	public String value() default "";
+	public String url() default "";
 }

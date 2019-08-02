@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._component.mvc_model;
+package weixinkeji.vip.jweb.mvc._component.mvc_mp_model;
 
 import java.lang.reflect.Parameter;
 

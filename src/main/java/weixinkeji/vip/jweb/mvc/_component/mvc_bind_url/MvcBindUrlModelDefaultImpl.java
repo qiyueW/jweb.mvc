@@ -41,7 +41,7 @@ public class MvcBindUrlModelDefaultImpl implements MvcBindUrlModel {
 	}
 
 	/**
-	 * 该方法 绑定 的url ，属于哪个请求方式（比如 post、get、put），把它返回出来<br>
+	 * 取得该方法绑定的url,属于哪个请求方式（比如 post、get、put）<br>
 	 * 默认 返回 get(在此方法中处理中)<br>
 	 * 
 	 * 优先级：JWebRequest>JWebPost>JWebGet>JWebPut(在此方法中处理中)<br>
@@ -76,7 +76,7 @@ public class MvcBindUrlModelDefaultImpl implements MvcBindUrlModel {
 	 * @param value2       参数
 	 * @return String
 	 */
-	private String getNotEmptyValue(String defaultValue, String value1, String value2) {
+	protected String getNotEmptyValue(String defaultValue, String value1, String value2) {
 		String rs;
 		if (null != value1 && (rs = value1.trim()).length() > 0) {
 			return rs;

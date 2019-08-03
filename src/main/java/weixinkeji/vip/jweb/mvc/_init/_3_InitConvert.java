@@ -2,8 +2,8 @@ package weixinkeji.vip.jweb.mvc._init;
 
 import java.util.List;
 
+import weixinkeji.vip.jweb.mvc._component.convert.MvcStringConvertModel;
 import weixinkeji.vip.jweb.mvc._component.convert.MvcStringDataConver;
-import weixinkeji.vip.jweb.mvc._component.convert._InitConvert;
 
 final public class _3_InitConvert extends __InitModel {
 	/**
@@ -22,6 +22,6 @@ final public class _3_InitConvert extends __InitModel {
 	 */
 	@Override
 	protected  void initConfig() {
-		_InitConvert.init(super.findClass_T(MvcStringDataConver.class));
+		MvcStringConvertModel.init(super.findClass_T(MvcStringDataConver.class));
 	}
 }

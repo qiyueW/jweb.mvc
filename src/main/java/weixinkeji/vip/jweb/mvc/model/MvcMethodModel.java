@@ -23,12 +23,12 @@ public final class MvcMethodModel {
 	/**
 	 * 放入mvc方法模型
 	 * 
-	 * @param url   请求方法
-	 * @param model MvcMethodModel 方法模型
+	 * @param bindUrl 绑定的请求路径
+	 * @param model   MvcMethodModel 方法模型
 	 */
-	public static void regMvcMethodModel(String url, MvcMethodModel model) {
+	public static void regMvcMethodModel(String bindUrl, MvcMethodModel model) {
 		if (urlMapMethod_open) {
-			urlMapMethod.put(url, model);
+			urlMapMethod.put(bindUrl, model);
 		}
 	}
 
@@ -41,10 +41,6 @@ public final class MvcMethodModel {
 
 	// ---------------------------------------------------------------------------
 
-	/**
-	 * 绑定的请求路径
-	 */
-	public String bindUrl;
 	/**
 	 * 方法
 	 */
@@ -59,7 +55,7 @@ public final class MvcMethodModel {
 	 */
 	public final MvcMethodReturnModel returnModel;
 
-	public MvcMethodModel(Method method) {
+	private MvcMethodModel(Method method) {
 		this.method = method;
 		this.paramMode = MvcMethodParameterModel.getMvcMethodParameterModel(method);
 		this.returnModel = new MvcMethodReturnModel(method);

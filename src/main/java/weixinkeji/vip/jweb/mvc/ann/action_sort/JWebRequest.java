@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc.ann;
+package weixinkeji.vip.jweb.mvc.ann.action_sort;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

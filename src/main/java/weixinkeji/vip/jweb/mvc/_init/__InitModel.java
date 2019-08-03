@@ -25,11 +25,16 @@ abstract class __InitModel {
 	}
 
 	/**
+	 * 初始化入口
+	 */
+	protected abstract void initConfig();
+
+	/**
 	 * 工具：找到T的实现类，并返回一个实例。
 	 * <p>
 	 * 找不到，则返回用户指定的实例。
 	 * 
-	 * @param <T>  泛型
+	 * @param <T>       泛型
 	 * @param yourClass 你要找的类型
 	 * @param obj       用户指定的实例
 	 * @return T 泛型

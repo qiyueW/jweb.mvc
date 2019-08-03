@@ -5,13 +5,13 @@ import java.util.List;
 import weixinkeji.vip.jweb.mvc._component.convert.MvcStringDataConver;
 import weixinkeji.vip.jweb.mvc._component.convert._InitConvert;
 
-public class _1_InitConvert extends __InitModel {
+final public class _3_InitConvert extends __InitModel {
 	/**
 	 * 需要扫描类的集合
 	 * 
 	 * @param list 扫描到的类
 	 */
-	public _1_InitConvert(List<Class<?>> list) {
+	public _3_InitConvert(List<Class<?>> list) {
 		super(list);
 		this.initConfig();
 	}
@@ -20,7 +20,8 @@ public class _1_InitConvert extends __InitModel {
 	 * 初始化配置
 	 * 
 	 */
-	private void initConfig() {
+	@Override
+	protected  void initConfig() {
 		_InitConvert.init(super.findClass_T(MvcStringDataConver.class));
 	}
 }

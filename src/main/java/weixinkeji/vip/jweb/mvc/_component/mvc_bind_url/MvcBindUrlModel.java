@@ -1,43 +1,32 @@
 package weixinkeji.vip.jweb.mvc._component.mvc_bind_url;
 
-import java.lang.reflect.Method;
+public class MvcBindUrlModel {
 
-/**
- * 绑定路径模型
- * 
- * @author wangchunzi
- *
- */
-public interface MvcBindUrlModel {
+//	资源——处理模型
+	private static MvcBindUrl urlModel;
+
+	// 初始化开关
+	private static boolean init = false;
 
 	/**
-	 * 取得绑定在类上的路径
+	 * 初始化入口
 	 * 
-	 * 如果没有注解，直接返回空；<br>
-	 * 如果有注解，检查注解里的路径，如是有，优先返回value的，次url(value与url都表示空)；没有，返回空<br>
-	 * 
-	 * @param c 控制类
-	 * @return String 路径
+	 * @param c
 	 */
-	String getClassUrl(Class<?> c);
+	synchronized public static void init(MvcBindUrl obj) {
+		if (init) {
+			return;
+		}
+		init = true;
+		urlModel = obj;
+	}
 
 	/**
-	 * 取得绑定在方法上的路径
+	 * 取得处理 绑定在类或方法上的路径、及其他路径请求有关的信息
 	 * 
-	 * @param m 控制类里的方法
-	 * @return String 路径
+	 * @return MvcBindUrl
 	 */
-	String getMethodUrl(Method m);
-
-	/**
-	 * 取得该方法绑定的url,属于哪个请求方式（比如 post、get、put）<br>
-	 * 默认 返回 get(在此方法中处理中)<br>
-	 * 
-	 * 优先级：JWebRequest>JWebPost>JWebGet>JWebPut(在此方法中处理中)<br>
-	 * 
-	 * @param m 方法
-	 * @return String 请求方式 （比如 post、get、put）
-	 */
-	String getUrActionSort(Method m);
-
+	public static MvcBindUrl getMvcBindUrl() {
+		return urlModel;
+	}
 }

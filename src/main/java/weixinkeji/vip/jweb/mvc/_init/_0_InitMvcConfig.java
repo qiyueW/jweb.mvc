@@ -7,7 +7,7 @@ import weixinkeji.vip.jweb.mvc.config.JWebMVCConfig;
 import weixinkeji.vip.jweb.mvc.config.JWebMVCConfigDefaultImpl;
 import weixinkeji.vip.jweb.mvc.config._InitConfigJWebMvcConfig;
 
-public class _0_InitMvcConfig extends __InitModel {
+final public class _0_InitMvcConfig extends __InitModel {
 	/**
 	 * 需要扫描类的集合
 	 * 
@@ -22,7 +22,8 @@ public class _0_InitMvcConfig extends __InitModel {
 	 * 初始化配置
 	 * 
 	 */
-	private void initConfig() {
+	@Override
+	protected void initConfig() {
 		ConfigVoTemp tempVo = new ConfigVoTemp();// 配置载体
 		JWebMVCConfig config = super.findObject(JWebMVCConfig.class, new JWebMVCConfigDefaultImpl());// 找配置。找不到则采用默认的实现类
 		config.setJWebMvcConfig(tempVo);// 加载用户配置

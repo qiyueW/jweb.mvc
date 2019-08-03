@@ -1,5 +1,6 @@
 package weixinkeji.vip.jweb.mvc._component.mvc_mp_model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +16,20 @@ public class MvcMethodParameterModelConfigModel {
 	 * 
 	 * @param list List
 	 */
-	synchronized public static void init(List<MvcMethodParameterModelConfig<?>> list) {
+	synchronized public static void init(List<Class<?>> list) {
 		if (init) {
 			return;
 		}
 		init = true;
-		for (MvcMethodParameterModelConfig<?> config : list) {
-			configModel.put(getMethodT(config), null);
+		MvcMethodParameterModelConfig<?> obj;
+		try {
+			for (Class<?> c : list) {
+				obj = (MvcMethodParameterModelConfig<?>) c.getConstructor().newInstance();
+				configModel.put(getMethodT(obj), obj);
+			}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
 	}
 

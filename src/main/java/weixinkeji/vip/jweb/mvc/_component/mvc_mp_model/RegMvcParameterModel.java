@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MvcMethodParameterModelConfigModel {
+public class RegMvcParameterModel {
 
-	private final static Map<Class<?>, MvcMethodParameterModelConfig<?>> configModel = new HashMap<>();
+	private final static Map<Class<?>, RegMvcParameter<?>> configModel = new HashMap<>();
 	private static boolean init = false;
 
 	/**
@@ -21,10 +21,10 @@ public class MvcMethodParameterModelConfigModel {
 			return;
 		}
 		init = true;
-		MvcMethodParameterModelConfig<?> obj;
+		RegMvcParameter<?> obj;
 		try {
 			for (Class<?> c : list) {
-				obj = (MvcMethodParameterModelConfig<?>) c.getConstructor().newInstance();
+				obj = (RegMvcParameter<?>) c.getConstructor().newInstance();
 				configModel.put(getMethodT(obj), obj);
 			}
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -39,12 +39,12 @@ public class MvcMethodParameterModelConfigModel {
 	 * @param c 类型
 	 * @return MvcMethodParameterModelConfig
 	 */
-	public static MvcMethodParameterModelConfig<?> getMvcMethodParameterModelConfig(Class<?> c) {
+	public static RegMvcParameter<?> getMvcMethodParameterModelConfig(Class<?> c) {
 		return configModel.get(c);
 	}
 
 	// 取得方法返回的类型
-	private static Class<?> getMethodT(MvcMethodParameterModelConfig<?> convert) {
+	private static Class<?> getMethodT(RegMvcParameter<?> convert) {
 		for (Method m : convert.getClass().getDeclaredMethods()) {
 			if (m.getName().equals("getObject")) {
 				return m.getReturnType();

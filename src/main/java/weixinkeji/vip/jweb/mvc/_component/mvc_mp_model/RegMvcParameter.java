@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @param <T> 泛型
  */
-public interface MvcMethodParameterModelConfig<T> {
+public interface RegMvcParameter<T extends BindMvcParameterValidate> {
 
 	/**
 	 * 此类的实例方法
@@ -24,4 +24,5 @@ public interface MvcMethodParameterModelConfig<T> {
 	 */
 	T getObject(Parameter parameter, HttpServletRequest request, HttpServletResponse response);
 
+	
 }

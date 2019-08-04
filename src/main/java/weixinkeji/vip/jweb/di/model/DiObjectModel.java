@@ -7,7 +7,6 @@ import java.util.Map;
 
 import weixinkeji.vip.jweb.mvc.ann.JWebController;
 
-@SuppressWarnings("unchecked")
 final public class DiObjectModel {
 	private static final Map<Class<?>, DiObject> objs = new HashMap<>();
 
@@ -18,6 +17,7 @@ final public class DiObjectModel {
 	 * @param c
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T get(Class<T> c) {
 		DiObject obj = objs.get(c);
 		if (null == obj) {
@@ -29,25 +29,11 @@ final public class DiObjectModel {
 
 	private static boolean init = false;
 
+	/**
+	 * 关闭 开关。初始化方法不再起作用
+	 */
 	public static void closeInit() {
 		init = true;
-	}
-
-	private static Class<? extends Annotation>[] scanClassByAnnotation;
-	static {
-		init_0_config(JWebController.class);
-	}
-
-	/**
-	 * 首先初始此。被哪些 【注解】的类 会被扫描
-	 * 
-	 * @param ann 【注解】
-	 */
-	public static void init_0_config(Class<? extends Annotation>... ann) {
-		if (init) {
-			return;
-		}
-		scanClassByAnnotation = ann;
 	}
 
 	/**
@@ -68,15 +54,52 @@ final public class DiObjectModel {
 		return false;
 	}
 
-	public static void init_1_Annotation(List<Class<?>> c) {
+	private static Class<? extends Annotation>[] scanClassByAnnotation;
+	static {
+		init_0_config(JWebController.class);
+	}
+
+	/**
+	 * 首先初始此。被哪些 【注解】的类 会被扫描（每次调用此方法，都会覆盖其他的）
+	 * 
+	 * @param ann 【注解】
+	 */
+	@SafeVarargs
+	public static void init_0_config(Class<? extends Annotation>... ann) {
 		if (init) {
 			return;
 		}
+		scanClassByAnnotation = ann;
 	}
 
-	public static void init_1_RegDiObject() {
+	/**
+	 * 初始化_请在传入之前
+	 * 
+	 * @param c
+	 */
+	public static void init_1_Annotation(List<Class<?>> list) {
 		if (init) {
 			return;
+		}
+		
+		for (Class<?> c : list) {
+			DiObjectModel.objs.put(c, new DiObject(c));
+		}
+	}
+
+	/**
+	 * 初始化
+	 * 
+	 * @param yourClass
+	 */
+	public static void init_1_RegDiObject(List<RegDiObject> list) {
+		if (init) {
+			return;
+		}
+		DiObject di;
+		for (RegDiObject obj : list) {
+			di = new DiObject(obj);
+			DiObjectModel.objs.put(di.yourClass, di);
 		}
 	}
 

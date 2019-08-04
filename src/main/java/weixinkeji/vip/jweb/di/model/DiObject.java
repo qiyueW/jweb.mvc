@@ -2,6 +2,8 @@ package weixinkeji.vip.jweb.di.model;
 
 import java.lang.reflect.InvocationTargetException;
 
+import weixinkeji.vip.jweb.di.ann.JWebDINewType;
+
 public class DiObject {
 
 	/**
@@ -16,7 +18,7 @@ public class DiObject {
 	/**
 	 * 多例时
 	 */
-	private final Class<?> c;
+	public final Class<?> yourClass;
 	// 方便判断——是否是单例（true:是； false:否）
 	private final boolean isSingleton;
 	// 注册源：true=来自注解； false=来自手工注册
@@ -24,11 +26,11 @@ public class DiObject {
 	// 手工注册源
 	private final RegDiObject reg;
 
-	public DiObject(NewType newType, Class<?> c) {
-		super();
+	public DiObject(Class<?> c) {
+		JWebDINewType myNewType = c.getAnnotation(JWebDINewType.class);
 		this.regSourceByAnnotation = true;// 注册源
-		this.newType = newType;
-		this.c = c;
+		this.newType = null == myNewType || null == myNewType.value() ? NewType.singleton : myNewType.value();
+		this.yourClass = c;
 		try {
 			singletonObject = this.newType == NewType.singleton ? c.getConstructor().newInstance() : null;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -44,11 +46,10 @@ public class DiObject {
 		this.regSourceByAnnotation = false;// 不从注解中来
 		Object robj = reg.reg();// 不管是什么，调用一次，取一次实例
 		this.newType = reg.regObjectSort();// 单例还是原型
-		this.c = robj.getClass();// 取得用户注册的类型
+		this.yourClass = robj.getClass();// 取得用户注册的类型
 		singletonObject = this.newType == NewType.singleton ? robj : null;// 如果是单例模式，把实例附值给 静态的obj
 		this.reg = this.newType == NewType.prototype ? reg : null;// 如果是原型，缓存RegDiObject，方便每次访问调用 reg.reg() 取实例
 		this.isSingleton = null != singletonObject;// 方便校验，是否是单例
-
 	}
 
 	/**
@@ -59,12 +60,12 @@ public class DiObject {
 	public Object getObject() {
 		return this.isSingleton ? singletonObject : newObject();
 	}
-	
+
 	private Object newObject() {
 
 		try {
 			if (this.regSourceByAnnotation) {
-				return c.getConstructor().newInstance();
+				return yourClass.getConstructor().newInstance();
 			}
 			return reg.reg();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException

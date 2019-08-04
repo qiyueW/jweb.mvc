@@ -25,6 +25,7 @@ public class _InitMvcModel {
 		init = true;
 		// 专用处理绑定在类、方法上的路径的操作方法
 		MvcBindUrl bindUrlModel = MvcBindUrlModel.getMvcBindUrl();
+		// 临时变量
 		String headUrl, methodUrl;
 		UrlActionSort urlActionSort;
 		for (Class<?> c : list) {
@@ -36,7 +37,7 @@ public class _InitMvcModel {
 						urlActionSort = bindUrlModel.getUrActionSort(m); // get\post\put\.....
 						// 注册mvc处理
 						MvcMethodModel.regMvcMethodModel(getUrl(headUrl, methodUrl), m, urlActionSort);
-
+						
 					}
 					c.getConstructor().newInstance();// 实例
 				}

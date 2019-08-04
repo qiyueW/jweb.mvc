@@ -1,10 +1,12 @@
 package weixinkeji.vip.jweb.mvc.model;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import weixinkeji.vip.jweb.mvc._component.mvc_bind_url.MvcBindUrl;
 import weixinkeji.vip.jweb.mvc._component.mvc_bind_url.MvcBindUrlModel;
+import weixinkeji.vip.jweb.mvc.ann.UrlActionSort;
 
 /**
  * 模型中，有部分数据是从用户开发中来，此类是对外部分数据，整合到我们的模型中来
@@ -24,10 +26,20 @@ public class _InitMvcModel {
 		// 专用处理绑定在类、方法上的路径的操作方法
 		MvcBindUrl bindUrlModel = MvcBindUrlModel.getMvcBindUrl();
 		String headUrl, methodUrl;
+		UrlActionSort urlActionSort;
 		for (Class<?> c : list) {
 			try {
-//				bindUrlModel.getClassUrl(c)
-				c.getConstructor().newInstance();// 实例
+				headUrl = bindUrlModel.getClassUrl(c);
+				if (null != headUrl) {// 当类上有控制类的注解时
+					for (Method m : c.getDeclaredMethods()) {
+						methodUrl = bindUrlModel.getMethodUrl(m); // 方法上绑定的路径
+						urlActionSort = bindUrlModel.getUrActionSort(m); // get\post\put\.....
+						// 注册mvc处理
+						MvcMethodModel.regMvcMethodModel(getUrl(headUrl, methodUrl), m, urlActionSort);
+
+					}
+					c.getConstructor().newInstance();// 实例
+				}
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();

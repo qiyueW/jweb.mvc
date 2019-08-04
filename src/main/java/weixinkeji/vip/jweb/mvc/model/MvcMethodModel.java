@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import weixinkeji.vip.jweb.mvc.ann.UrlActionSort;
+
 public final class MvcMethodModel {
 	// 存放 url映射Method 的集合
 	private static final Map<String, MvcMethodModel> urlMapMethod = new HashMap<>();
@@ -24,11 +26,13 @@ public final class MvcMethodModel {
 	 * 放入mvc方法模型
 	 * 
 	 * @param bindUrl 绑定的请求路径
+	 * @param method  方法
+	 * @param uas     UrlActionSort路径请求类型 post,get,put,......
 	 * @param model   MvcMethodModel 方法模型
 	 */
-	public static void regMvcMethodModel(String bindUrl, MvcMethodModel model) {
+	public static void regMvcMethodModel(String bindUrl, Method method, UrlActionSort uas) {
 		if (urlMapMethod_open) {
-			urlMapMethod.put(bindUrl, model);
+			urlMapMethod.put(bindUrl, new MvcMethodModel(method, uas));
 		}
 	}
 
@@ -45,6 +49,7 @@ public final class MvcMethodModel {
 	 * 方法
 	 */
 	public Method method;
+
 	/**
 	 * 方法包含的参数模型
 	 */
@@ -54,9 +59,14 @@ public final class MvcMethodModel {
 	 * 方法返回类型
 	 */
 	public final MvcMethodReturnModel returnModel;
+	/**
+	 * 绑定的路径归属 哪种请求类型：ALL、POST、GET......
+	 */
+	public final String urlActionSort;
 
-	private MvcMethodModel(Method method) {
+	private MvcMethodModel(Method method, UrlActionSort uas) {
 		this.method = method;
+		this.urlActionSort = uas.name();
 		this.paramMode = MvcMethodParameterModel.getMvcMethodParameterModel(method);
 		this.returnModel = new MvcMethodReturnModel(method);
 		this.paramLengthIs0 = this.paramMode.length == 0;

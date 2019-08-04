@@ -13,7 +13,7 @@ public class DiObject {
 	/**
 	 * 单例时
 	 */
-	private static Object singletonObject;
+	private Object singletonObject;
 
 	/**
 	 * 多例时
@@ -36,8 +36,9 @@ public class DiObject {
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
+			this.singletonObject = null;
 		} // 如果是单例模式，把实例附值给 静态的obj
-		this.isSingleton = null != singletonObject;
+		this.isSingleton = null != this.singletonObject;
 
 		this.reg = null;
 	}
@@ -47,9 +48,9 @@ public class DiObject {
 		Object robj = reg.reg();// 不管是什么，调用一次，取一次实例
 		this.newType = reg.regObjectSort();// 单例还是原型
 		this.yourClass = robj.getClass();// 取得用户注册的类型
-		singletonObject = this.newType == NewType.singleton ? robj : null;// 如果是单例模式，把实例附值给 静态的obj
+		this.singletonObject = this.newType == NewType.singleton ? robj : null;// 如果是单例模式，把实例附值给 静态的obj
 		this.reg = this.newType == NewType.prototype ? reg : null;// 如果是原型，缓存RegDiObject，方便每次访问调用 reg.reg() 取实例
-		this.isSingleton = null != singletonObject;// 方便校验，是否是单例
+		this.isSingleton = null != this.singletonObject;// 方便校验，是否是单例
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class DiObject {
 	 * @return
 	 */
 	public Object getObject() {
-		return this.isSingleton ? singletonObject : newObject();
+		return this.isSingleton ? this.singletonObject : newObject();
 	}
 
 	private Object newObject() {

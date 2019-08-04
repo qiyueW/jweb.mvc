@@ -47,7 +47,7 @@ final public class DiObjectModel {
 			return false;
 		}
 		for (Class<? extends Annotation> ac : scanClassByAnnotation) {
-			if (null == c.getAnnotation(ac)) {
+			if (null != c.getAnnotation(ac)) {
 				return true;
 			}
 		}

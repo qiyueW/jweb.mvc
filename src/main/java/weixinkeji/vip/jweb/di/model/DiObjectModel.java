@@ -73,7 +73,7 @@ final public class DiObjectModel {
 	}
 
 	/**
-	 * 初始化_请在传入之前
+	 * 初始化
 	 * 
 	 * @param c
 	 */
@@ -81,9 +81,11 @@ final public class DiObjectModel {
 		if (init) {
 			return;
 		}
-		
+
 		for (Class<?> c : list) {
-			DiObjectModel.objs.put(c, new DiObject(c));
+			if (classHasTheAnnotation(c)) {
+				DiObjectModel.objs.put(c, new DiObject(c));
+			}
 		}
 	}
 

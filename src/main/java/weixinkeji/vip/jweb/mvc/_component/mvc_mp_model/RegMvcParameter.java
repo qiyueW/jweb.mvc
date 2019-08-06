@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @param <T> 泛型
  */
-public interface RegMvcParameter<T extends BindMvcParameterValidate> {
+public interface RegMvcParameter {
 
 	/**
 	 * 此类的实例方法
@@ -20,9 +20,13 @@ public interface RegMvcParameter<T extends BindMvcParameterValidate> {
 	 * @param parameter Parameter
 	 * @param request   HttpServletRequest
 	 * @param response  HttpServletResponse
-	 * @return T
 	 */
-	T getObject(Parameter parameter, HttpServletRequest request, HttpServletResponse response);
+	void init(Parameter parameter, HttpServletRequest request, HttpServletResponse response);
 
-	
+	/**
+	 * 校验
+	 * 
+	 * @return boolean
+	 */
+	boolean validate();
 }

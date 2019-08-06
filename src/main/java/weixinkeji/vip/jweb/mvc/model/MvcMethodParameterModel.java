@@ -40,7 +40,7 @@ public final class MvcMethodParameterModel {
 	private static ParamWebValueSort checkGetParamWebValueWay(Parameter parameter) {
 		Class<?> vtype = parameter.getType();
 // 用户自定义
-		if (null != RegMvcParameterModel.getMvcMethodParameterModelConfig(vtype)) {
+		if (null != RegMvcParameterModel.getUserRegMvcParameter(vtype)) {
 			return ParamWebValueSort.userVo;
 		}
 //基本类型		
@@ -150,9 +150,8 @@ public final class MvcMethodParameterModel {
 		switch (this.paramType) {
 //用户自定义注册的类型
 		case userVo: {
-			RegMvcParameter<?> obj = RegMvcParameterModel
-					.getMvcMethodParameterModelConfig(this.parameterVoClassType);
-			return null == obj ? null : obj.getObject(this.parameter, req, response);
+			Class<? extends RegMvcParameter> userVo=RegMvcParameterModel.getUserRegMvcParameter(this.parameterVoClassType);
+			return null==userVo?null:RegMvcParameterModel.getObject(userVo, parameter, req, response);
 		}
 //基本类型 1			
 		case baseType: {

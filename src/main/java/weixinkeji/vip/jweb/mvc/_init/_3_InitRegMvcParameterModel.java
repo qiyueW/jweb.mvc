@@ -2,7 +2,7 @@ package weixinkeji.vip.jweb.mvc._init;
 
 import java.util.List;
 
-import weixinkeji.vip.jweb.mvc._component.mvc_mp_model.RegMvcParameter;
+import weixinkeji.vip.jweb.mvc._component.mvc_mp_model.RegBindMvcParameterConfig;
 import weixinkeji.vip.jweb.mvc._component.mvc_mp_model.RegMvcParameterModel;
 
 final public class _3_InitRegMvcParameterModel extends __InitModel {
@@ -21,6 +21,6 @@ final public class _3_InitRegMvcParameterModel extends __InitModel {
 	 */
 	@Override
 	protected void initConfig() {
-		RegMvcParameterModel.init(super.findClass_T(RegMvcParameter.class));
+		RegMvcParameterModel.init(super.findObject(RegBindMvcParameterConfig.class, null));
 	}
 }

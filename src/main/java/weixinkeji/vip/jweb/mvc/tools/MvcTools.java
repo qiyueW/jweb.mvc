@@ -31,7 +31,13 @@ public class MvcTools {
 	public static String strTransform_(String str) {
 		char[] cs = str.toCharArray();
 		StringBuilder sb = new StringBuilder();
+		int i = 0;
 		for (char c : cs) {
+			if (i == 0 && c >= 'A' && c <= 'Z') {
+				i++;
+				sb.append(Character.toLowerCase(c));
+				continue;
+			}
 			if (c >= 'A' && c <= 'Z') {
 				sb.append('_').append(Character.toLowerCase(c));
 			} else {

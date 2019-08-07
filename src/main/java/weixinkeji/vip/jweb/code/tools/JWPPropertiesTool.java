@@ -11,13 +11,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+/**
+ * 属性文件 处理工具
+ * 
+ * @author wangchunzi
+ *
+ */
 public class JWPPropertiesTool {
-	
+
 	/**
 	 * 加载属性文件的 key,value 到用户的Map实例中
 	 * 
-	 * @param map Map实例 要求必须有key。 value的值由此方法填充(根据属性文件对应的key-value)
-	 * @param file  属性文件的路径
+	 * @param map  Map实例 要求必须有key。 value的值由此方法填充(根据属性文件对应的key-value)
+	 * @param file 属性文件的路径
 	 */
 	public void loadPropertiesToMap(Map<String, String> map, File file) {
 		Properties pt = new Properties();// 实例一个专门处理属性文件的 对象
@@ -56,8 +62,8 @@ public class JWPPropertiesTool {
 	 * @return Map
 	 */
 	public Map<String, String> loadPropertiesToMap(File file) {
-		if(null==file||!file.exists()||file.isDirectory()) {
-			System.err.println("没有找到文件"+file.getAbsolutePath());
+		if (null == file || !file.exists() || file.isDirectory()) {
+			System.err.println("没有找到文件" + file.getAbsolutePath());
 			return null;
 		}
 		Properties pt = new Properties();// 实例一个专门处理属性文件的 对象
@@ -75,9 +81,9 @@ public class JWPPropertiesTool {
 			}
 			return map;
 		} catch (FileNotFoundException e) {
-			System.out.println("文件不存在 ！");
+			System.err.println("文件不存在 ！");
 		} catch (IOException e) {
-			System.out.println("输入流异常！！！");
+			System.err.println("输入流异常！！！");
 		} finally {
 			if (null != is) {
 				try {
@@ -93,7 +99,7 @@ public class JWPPropertiesTool {
 	private String toUtf8(String str) {
 		try {
 			if (str.equals(new String(str.getBytes("ISO-8859-1"), "ISO-8859-1"))) {
-				return new String(str.getBytes("ISO-8859-1"),"utf-8");
+				return new String(str.getBytes("ISO-8859-1"), "utf-8");
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

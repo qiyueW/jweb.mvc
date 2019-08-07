@@ -2,7 +2,12 @@ package weixinkeji.vip.jweb.code.tools;
 
 import java.util.Vector;
 
-
+/**
+ * 打印
+ * 
+ * @author wangchunzi
+ *
+ */
 public class JWPControllePrint {
 
 	private Vector<ConsoleVO> consoleMsg = new Vector<>();

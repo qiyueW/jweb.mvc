@@ -19,14 +19,12 @@ public class MvcFilter implements Filter {
      * Default constructor. 
      */
     public MvcFilter() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**

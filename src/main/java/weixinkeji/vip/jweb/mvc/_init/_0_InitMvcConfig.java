@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.mvc._init;
+ package weixinkeji.vip.jweb.mvc._init;
 
 import java.util.List;
 

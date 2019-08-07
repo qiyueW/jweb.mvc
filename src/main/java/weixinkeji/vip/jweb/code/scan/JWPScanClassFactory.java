@@ -1,10 +1,10 @@
-package weixinkeji.vip.jweb.scan;
+package weixinkeji.vip.jweb.code.scan;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import weixinkeji.vip.jweb.tools.JWPPathTool;
+import weixinkeji.vip.jweb.code.tools.JWPPathTool;
 
 public class JWPScanClassFactory {
 	private JWPScanClassFactory() {

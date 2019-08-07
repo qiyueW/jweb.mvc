@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.di.model;
+package weixinkeji.vip.jweb.code.di.model;
 
 public enum NewType {
 	singleton, prototype

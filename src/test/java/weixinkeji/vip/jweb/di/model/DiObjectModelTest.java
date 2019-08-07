@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import weixinkeji.vip.jweb.code.di.model.DiObjectModel;
 import weixinkeji.vip.jweb.di.model.tdata.MyControllerDI;
 import weixinkeji.vip.jweb.di.model.tdata.MyControllerDI_N;
 import weixinkeji.vip.jweb.mvc.ann.JWebController;

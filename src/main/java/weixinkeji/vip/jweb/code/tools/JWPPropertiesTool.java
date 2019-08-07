@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.tools;
+package weixinkeji.vip.jweb.code.tools;
 
 import java.io.File;
 import java.io.FileInputStream;

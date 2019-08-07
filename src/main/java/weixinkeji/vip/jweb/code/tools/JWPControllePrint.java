@@ -1,6 +1,7 @@
-package weixinkeji.vip.jweb.tools;
+package weixinkeji.vip.jweb.code.tools;
 
 import java.util.Vector;
+
 
 public class JWPControllePrint {
 

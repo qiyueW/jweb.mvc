@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.di.ann;
+package weixinkeji.vip.jweb.code.di.ann;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -6,7 +6,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import weixinkeji.vip.jweb.di.model.NewType;
+import weixinkeji.vip.jweb.code.di.model.NewType;
 
 /**
  * 用在类上，表示此类是多例还是单例。默认是多例

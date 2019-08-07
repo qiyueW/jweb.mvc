@@ -1,8 +1,8 @@
-package weixinkeji.vip.jweb.di.model;
+package weixinkeji.vip.jweb.code.di.model;
 
 import java.lang.reflect.InvocationTargetException;
 
-import weixinkeji.vip.jweb.di.ann.JWebDINewType;
+import weixinkeji.vip.jweb.code.di.ann.JWebDINewType;
 
 public class DiObject {
 

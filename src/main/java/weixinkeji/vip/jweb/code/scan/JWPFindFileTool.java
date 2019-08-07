@@ -1,4 +1,4 @@
-package weixinkeji.vip.jweb.scan;
+package weixinkeji.vip.jweb.code.scan;
 
 import java.io.File;
 import java.util.HashSet;

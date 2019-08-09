@@ -42,8 +42,8 @@ public class DiObject {
 
 		this.reg = null;
 	}
-
-	public void initObjectField() {
+	
+	public void initObjectField(Object obj) {
 		// 绑定属性文件 处理类
 		BingClassPathPropertiesModel bindPropertiesModel = new BingClassPathPropertiesModel();
 		// 判断是否绑定了属性文件——通过特定的注解判断
@@ -51,7 +51,7 @@ public class DiObject {
 			return;// 如果没有绑定，直接中止
 		}
 		bindPropertiesModel.loadProperties_1();// 加载配置文件
-		
+		for
 	}
 
 	public DiObject(RegDiObject reg) {

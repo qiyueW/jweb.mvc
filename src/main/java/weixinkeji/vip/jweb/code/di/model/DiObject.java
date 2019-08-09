@@ -43,6 +43,17 @@ public class DiObject {
 		this.reg = null;
 	}
 
+	public void initObjectField() {
+		// 绑定属性文件 处理类
+		BingClassPathPropertiesModel bindPropertiesModel = new BingClassPathPropertiesModel();
+		// 判断是否绑定了属性文件——通过特定的注解判断
+		if (!bindPropertiesModel.isPropertiesAnnatotion_1()) {
+			return;// 如果没有绑定，直接中止
+		}
+		bindPropertiesModel.loadProperties_1();// 加载配置文件
+		
+	}
+
 	public DiObject(RegDiObject reg) {
 		this.regSourceByAnnotation = false;// 不从注解中来
 		Object robj = reg.reg();// 不管是什么，调用一次，取一次实例

@@ -18,7 +18,7 @@ import weixinkeji.vip.jweb.code.tools.STTools;
  */
 public class BingClassPathPropertiesModel {
 	// 处理目标 类
-	private Class<?> c;
+//	private Class<?> c;
 	private List<Map<String, String>> propertiesList = new ArrayList<>();
 	private BindProperties ann;
 	private Boolean eq;
@@ -29,7 +29,7 @@ public class BingClassPathPropertiesModel {
 	 * @param c 类
 	 */
 	public void setClass_0(Class<?> c) {
-		this.c = c;
+//		this.c = c;
 		this.propertiesList.clear();
 		this.ann = c.getAnnotation(BindProperties.class);
 		this.eq = null == this.ann ? null : ann.eq();

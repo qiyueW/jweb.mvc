@@ -25,7 +25,9 @@ public class DiObject {
 	private final boolean regSourceByAnnotation;
 	// 手工注册源
 	private final RegDiObject reg;
-
+	// 绑定属性文件 处理类
+	BingClassPathPropertiesModel bindPropertiesModel = new BingClassPathPropertiesModel();
+	
 	public DiObject(Class<?> c) {
 		JWebDINewType myNewType = c.getAnnotation(JWebDINewType.class);
 		this.regSourceByAnnotation = true;// 注册源
@@ -42,16 +44,16 @@ public class DiObject {
 
 		this.reg = null;
 	}
-	
+
 	public void initObjectField(Object obj) {
-		// 绑定属性文件 处理类
-		BingClassPathPropertiesModel bindPropertiesModel = new BingClassPathPropertiesModel();
 		// 判断是否绑定了属性文件——通过特定的注解判断
 		if (!bindPropertiesModel.isPropertiesAnnatotion_1()) {
 			return;// 如果没有绑定，直接中止
 		}
-		bindPropertiesModel.loadProperties_1();// 加载配置文件
-		for
+		// 加载配置文件
+		if(bindPropertiesModel.loadProperties_1()<1) {//绑定的配置文件 没有找到，或读取时io流异常
+			return;//中止
+		}
 	}
 
 	public DiObject(RegDiObject reg) {

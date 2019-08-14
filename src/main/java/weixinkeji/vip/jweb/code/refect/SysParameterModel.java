@@ -24,4 +24,5 @@ public class SysParameterModel {
 		this.parameterTypye = param.getType();
 	}
 	
+	
 }

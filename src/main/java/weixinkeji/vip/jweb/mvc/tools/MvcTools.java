@@ -1,7 +1,5 @@
 package weixinkeji.vip.jweb.mvc.tools;
 
-import java.util.Date;
-
 public class MvcTools {
 
 	/**

@@ -6,7 +6,7 @@ import java.lang.reflect.Parameter;
 public class SysMethodModel {
 
 	private final Method method;
-	private final Parameter[] parameters;
+	private final SysParameterModel[] paraModels;
 
 	/**
 	 * 构造函数
@@ -15,8 +15,8 @@ public class SysMethodModel {
 	 */
 	public SysMethodModel(Method method) {
 		this.method = method;
-		this.parameters = this.method.getParameters();
-		
+		this.paraModels = null; // this.method.getParameters();
+
 	}
 
 }

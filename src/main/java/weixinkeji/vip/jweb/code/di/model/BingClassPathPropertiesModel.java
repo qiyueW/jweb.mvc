@@ -8,7 +8,7 @@ import java.util.Map;
 import weixinkeji.vip.jweb.code.di.ann.BindProperties;
 import weixinkeji.vip.jweb.code.tools.JWPPathTool;
 import weixinkeji.vip.jweb.code.tools.JWPPropertiesTool;
-import weixinkeji.vip.jweb.code.tools.STTools;
+import weixinkeji.vip.jweb.code.tools.SysTools;
 
 /**
  * 绑定属性文件 处理类
@@ -94,7 +94,7 @@ public class BingClassPathPropertiesModel {
 				}
 			}
 		} else {
-			String hto_ = STTools.humpTo_(key);
+			String hto_ = SysTools.humpTo_(key);
 			for (Map<String, String> m : this.propertiesList) {
 				if (null != (rs = m.get(key)) || null != (rs = m.get(hto_))) {
 					return rs;

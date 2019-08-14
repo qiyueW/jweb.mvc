@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
 
+import weixinkeji.vip.jweb.code.tools.SysTools;
 import weixinkeji.vip.jweb.mvc.JWebMvc;
 import weixinkeji.vip.jweb.mvc._component.convert.MvcStringConvertModel;
 import weixinkeji.vip.jweb.mvc._component.file.FileModel;
@@ -24,7 +25,6 @@ import weixinkeji.vip.jweb.mvc.ann.JsonIO;
 import weixinkeji.vip.jweb.mvc.ann.JsonKV;
 import weixinkeji.vip.jweb.mvc.ann.ParamKey;
 import weixinkeji.vip.jweb.mvc.config.JWebConfigModel;
-import weixinkeji.vip.jweb.mvc.tools.MvcTools;
 import weixinkeji.vip.jweb.validate.ValidateResult;
 import weixinkeji.vip.jweb.validate.model.BaseTypeValidateModel;
 import weixinkeji.vip.jweb.validate.model.VoValidateModel;
@@ -44,7 +44,7 @@ public final class MvcMethodParameterModel {
 			return ParamWebValueSort.userVo;
 		}
 //基本类型		
-		if (MvcTools.isJavaBaseType(vtype)) {// java普通类型
+		if (SysTools.isJavaBaseType(vtype)) {// java普通类型
 			return ParamWebValueSort.baseType;
 		}
 //框架封装		

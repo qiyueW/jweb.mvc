@@ -22,7 +22,6 @@ public class SysParameterModel {
 	public SysParameterModel(Parameter param) {
 		this.parameter = param;
 		this.parameterTypye = param.getType();
-		
 	}
-
+	
 }

@@ -1,12 +1,14 @@
 package weixinkeji.vip.jweb.code.tools;
 
+import java.util.Date;
+
 /**
  * 标准 规范 辅助工具
  * 
  * @author wangchunzi
  *
  */
-public class STTools {
+public class SysTools {
 
 	/**
 	 * 驼峰 转 下划线相接
@@ -31,6 +33,24 @@ public class STTools {
 			}
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * 在这里，8种基本类型的拓展类型，也被当作java基本类型看待，满足即返回true
+	 * 
+	 * @param c 类型
+	 * @return boolean
+	 */
+	public static boolean isJavaBaseType(Class<?> c) {
+		return c == byte.class || c == Byte.class || c == byte[].class || c == Byte[].class // byte
+				|| c == boolean.class || c == Boolean.class// boolean
+				|| c == char.class || c == Character.class || c == char[].class || c == Character[].class// char
+				|| c == short.class || c == Short.class// short
+				|| c == int.class || c == Integer.class // int
+				|| c == long.class || c == Long.class // long
+				|| c == float.class || c == Float.class // float
+				|| c == double.class || c == Double.class // double
+				|| c == Date.class || c == java.sql.Date.class;
 	}
 
 	public static void main(String[] args) {
